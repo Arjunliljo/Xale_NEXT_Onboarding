@@ -89,9 +89,9 @@ export default function Pillars() {
   });
 
   return (
-    <section ref={sectionRef} className="relative py-32 bg-white">
+    <section ref={sectionRef} className="relative py-32 max-md:py-20 max-sm:py-16 bg-white">
       <div
-        className="relative w-full overflow-hidden"
+        className="relative w-full overflow-hidden max-md:[height:260px] max-sm:[height:200px]"
         style={{
           height: "360px",
           backgroundColor: "#020c08",
@@ -105,8 +105,8 @@ export default function Pillars() {
         <AnimatedWaveDivider fill="#ffffff" height={120} />
       </div>
 
-      <div className="max-w-[1200px] mx-auto px-6">
-        <div className="text-center mb-20">
+      <div className="max-w-[1200px] mx-auto px-6 max-sm:px-4">
+        <div className="text-center mb-20 max-md:mb-12">
           <Reveal>
             <p
               className="text-sm uppercase tracking-[0.2em] mb-6"
@@ -117,7 +117,7 @@ export default function Pillars() {
           </Reveal>
           <Reveal delay={0.1}>
             <h2
-              className="text-4xl md:text-6xl font-medium leading-[1.05] mb-6 max-w-3xl mx-auto"
+              className="text-4xl max-sm:text-3xl md:text-6xl font-medium leading-[1.05] mb-6 max-w-3xl mx-auto"
               style={{
                 letterSpacing: "-0.035em",
                 color: "var(--color-text-primary,#1e302a)",

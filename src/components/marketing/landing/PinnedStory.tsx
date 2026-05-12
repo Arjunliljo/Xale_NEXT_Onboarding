@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { useIsMobile } from "@/src/hooks/useMediaQuery";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -45,9 +46,15 @@ const PHASES = [
 export default function PinnedStory() {
   const wrapperRef = useRef<HTMLElement>(null);
   const slidesRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   useGSAP(
     () => {
+      if (typeof window !== "undefined" && window.matchMedia("(max-width: 768px)").matches) return;
+      const reduce =
+        typeof window !== "undefined" &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduce) return;
       const slides = slidesRef.current?.children;
       if (!slides || slides.length === 0) return;
       const count = slides.length;
@@ -102,6 +109,88 @@ export default function PinnedStory() {
     },
     { scope: wrapperRef }
   );
+
+  if (isMobile) {
+    return (
+      <section
+        className="relative overflow-hidden py-16"
+        style={{
+          background:
+            "radial-gradient(120% 100% at 50% 0%, #102f23 0%, #051912 60%, #020c08 100%)",
+          color: "#fff",
+        }}
+      >
+        <div className="relative z-10 max-w-[1200px] mx-auto px-4 flex flex-col gap-8">
+          <div className="flex justify-center mb-2">
+            <span
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs text-center"
+              style={{
+                border: "1px solid rgba(152, 205, 184, 0.25)",
+                backgroundColor: "rgba(49,155,114,0.08)",
+                color: "rgba(255,255,255,0.85)",
+              }}
+            >
+              <span
+                className="w-1.5 h-1.5 rounded-full"
+                style={{
+                  backgroundColor: "#319b72",
+                  boxShadow: "0 0 8px #319b72",
+                }}
+              />
+              One lead. Four phases.
+            </span>
+          </div>
+          {PHASES.map((phase, i) => (
+            <div
+              key={i}
+              className="rounded-2xl p-6"
+              style={{
+                border: "1px solid rgba(255,255,255,0.08)",
+                backgroundColor: "rgba(255,255,255,0.03)",
+              }}
+            >
+              <p
+                className="text-xs uppercase tracking-[0.2em] mb-3"
+                style={{ color: phase.accent }}
+              >
+                {phase.eyebrow}
+              </p>
+              <h2
+                className="text-2xl font-medium leading-tight mb-3"
+                style={{ letterSpacing: "-0.025em" }}
+              >
+                {phase.title}
+              </h2>
+              <p
+                className="text-sm leading-relaxed mb-4"
+                style={{ color: "rgba(255,255,255,0.7)" }}
+              >
+                {phase.body}
+              </p>
+              <div
+                className="flex items-center gap-2 pt-3"
+                style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
+              >
+                <span
+                  className="w-1.5 h-1.5 rounded-full"
+                  style={{
+                    backgroundColor: phase.accent,
+                    boxShadow: `0 0 8px ${phase.accent}`,
+                  }}
+                />
+                <span
+                  className="text-[11px] uppercase tracking-wider"
+                  style={{ color: "rgba(255,255,255,0.5)" }}
+                >
+                  {phase.meta}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section

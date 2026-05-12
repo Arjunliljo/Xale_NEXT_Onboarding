@@ -680,7 +680,7 @@ export default function HeroGlobeScene({
 }) {
   return (
     <Canvas
-      dpr={[1, 1.5]}
+      dpr={typeof window !== "undefined" && window.matchMedia("(max-width: 768px)").matches ? [1, 1.25] : [1, 1.5]}
       gl={{
         antialias: false,
         powerPreference: "high-performance",

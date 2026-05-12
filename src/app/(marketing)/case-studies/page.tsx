@@ -16,14 +16,14 @@ export default async function CaseStudiesPage() {
   return (
     <>
       <section
-        className="py-32"
+        className="py-32 max-md:py-20 max-sm:py-16"
         style={{
           background:
             "radial-gradient(120% 100% at 50% 0%, #1a4a37 0%, #051912 60%)",
           color: "#fff",
         }}
       >
-        <div className="max-w-[1100px] mx-auto px-6 text-center">
+        <div className="max-w-[1100px] mx-auto px-6 max-sm:px-4 text-center">
           <p
             className="text-sm uppercase tracking-[0.2em] mb-6"
             style={{ color: "#98cdb8" }}
@@ -31,7 +31,7 @@ export default async function CaseStudiesPage() {
             Case studies
           </p>
           <h1
-            className="text-5xl md:text-7xl font-medium leading-[1.05] mb-6"
+            className="text-5xl max-sm:text-4xl md:text-7xl font-medium leading-[1.05] mb-6"
             style={{ letterSpacing: "-0.035em" }}
           >
             Real teams. Real numbers.
@@ -46,8 +46,8 @@ export default async function CaseStudiesPage() {
         </div>
       </section>
 
-      <section className="py-24 bg-white">
-        <div className="max-w-[1200px] mx-auto px-6">
+      <section className="py-24 max-md:py-16 bg-white">
+        <div className="max-w-[1200px] mx-auto px-6 max-sm:px-4">
           {cases.length === 0 ? (
             <p
               className="text-center"
@@ -61,7 +61,7 @@ export default async function CaseStudiesPage() {
                 <Link
                   key={c.slug}
                   href={`/case-studies/${c.slug}`}
-                  className="group block rounded-3xl p-8 md:p-10 transition-all"
+                  className="group block rounded-3xl p-8 md:p-10 max-sm:p-5 transition-all"
                   style={{
                     border: "1px solid var(--color-border-primary,#e6e8e7)",
                     backgroundColor: "#ffffff",

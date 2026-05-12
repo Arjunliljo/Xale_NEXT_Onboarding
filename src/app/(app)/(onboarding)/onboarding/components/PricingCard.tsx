@@ -9,7 +9,6 @@ import { useOnboarding } from "@/src/context/OnboardingContext";
 import type { PlanProps } from "@/src/hooks/usePlans";
 import { LightGreenBtn } from "@/src/components/Buttons/LightGreenButton";
 import { PrimaryButton } from "@/src/components/Buttons/PrimaryButton";
-import { useIsMobile } from "@/src/hooks/useMediaQuery";
 
 interface PricingCardProps {
   item: PlanProps;
@@ -56,8 +55,6 @@ function buildFeatures(plan: PlanProps): string[] {
 }
 
 const PricingCard = ({ item, isMonthly }: PricingCardProps) => {
-  const isMobile = useIsMobile();
-
   const { token } = useSelector(
     (state: { auth: { token: string | null } }) => state.auth
   );
@@ -133,7 +130,7 @@ const PricingCard = ({ item, isMonthly }: PricingCardProps) => {
         {isPopular && <div className="most-popular-tag">Most Popular</div>}
 
         <div className="text-center">
-          <h2 className="text-[17px] font-medium text-[#0f392b] tracking-tight my-2">
+          <h2 className="text-[17px] max-sm:text-[15px] font-medium text-[#0f392b] tracking-tight my-2">
             {item.name}
           </h2>
 
@@ -143,7 +140,7 @@ const PricingCard = ({ item, isMonthly }: PricingCardProps) => {
                 ₹{basePrice}
               </span>
             )}
-            <span className="text-[2.6rem] leading-none font-medium text-[#133d30] tracking-tight">
+            <span className="text-[2.6rem] max-md:text-[2.2rem] max-sm:text-[1.9rem] leading-none font-medium text-[#133d30] tracking-tight">
               {isCustomPlan
                 ? `From ₹${CUSTOM_PLAN_START_PRICE.toLocaleString("en-IN")}`
                 : isFree
@@ -181,14 +178,16 @@ const PricingCard = ({ item, isMonthly }: PricingCardProps) => {
           {isPopular && !isCustomPlan ? (
             <PrimaryButton
               onClick={() => handleSelectPlan(item)}
-              style={{ width: isMobile ? "90%" : "100%", height: "50px", fontSize: "16px" }}
+              className="!w-full max-md:!w-[90%]"
+              style={{ height: "50px", fontSize: "16px" }}
             >
               {isPending ? "Setting up…" : "Start free trial"}
             </PrimaryButton>
           ) : (
             <LightGreenBtn
               onClick={() => handleSelectPlan(item)}
-              style={{ width: isMobile ? "90%" : "100%", height: "50px", fontSize: "16px" }}
+              className="!w-full max-md:!w-[90%]"
+              style={{ height: "50px", fontSize: "16px" }}
             >
               {isCustomPlan
                 ? "Contact sales"

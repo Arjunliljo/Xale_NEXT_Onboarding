@@ -21,10 +21,10 @@ export default function IntegrationsMarquee() {
 
   return (
     <section
-      className="py-24 overflow-hidden"
+      className="py-24 max-md:py-16 overflow-hidden"
       style={{ backgroundColor: "#ffffff" }}
     >
-      <div className="text-center mb-12">
+      <div className="text-center mb-12 max-md:mb-8 max-sm:px-4">
         <Reveal>
           <p
             className="text-sm uppercase tracking-[0.2em]"
@@ -35,7 +35,7 @@ export default function IntegrationsMarquee() {
         </Reveal>
         <Reveal delay={0.05}>
           <h2
-            className="text-3xl md:text-4xl font-medium mt-4"
+            className="text-3xl max-sm:text-2xl md:text-4xl font-medium mt-4"
             style={{
               color: "var(--color-text-primary,#1e302a)",
               letterSpacing: "-0.02em",

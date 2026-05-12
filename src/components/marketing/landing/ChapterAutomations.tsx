@@ -82,10 +82,10 @@ const TONE_LABEL: Record<Step["tone"], string> = {
 
 export default function ChapterAutomations() {
   return (
-    <section className="py-32" style={{ backgroundColor: "#ffffff" }}>
-      <div className="max-w-[1200px] mx-auto px-6">
+    <section className="py-32 max-md:py-20 max-sm:py-16" style={{ backgroundColor: "#ffffff" }}>
+      <div className="max-w-[1200px] mx-auto px-6 max-sm:px-4">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 max-md:mb-10">
           <Reveal>
             <p
               className="text-sm uppercase tracking-[0.2em] mb-6"
@@ -96,7 +96,7 @@ export default function ChapterAutomations() {
           </Reveal>
           <Reveal delay={0.05}>
             <h2
-              className="text-4xl md:text-5xl font-medium leading-[1.05] max-w-3xl mx-auto mb-6"
+              className="text-4xl max-sm:text-3xl md:text-5xl font-medium leading-[1.05] max-w-3xl mx-auto mb-6"
               style={{
                 letterSpacing: "-0.03em",
                 color: "var(--color-text-primary,#1e302a)",
@@ -131,7 +131,7 @@ export default function ChapterAutomations() {
         {/* Workflow panel */}
         <Reveal delay={0.15}>
           <div
-            className="rounded-3xl p-8 md:p-10 mb-6"
+            className="rounded-3xl p-8 md:p-10 max-sm:p-5 mb-6"
             style={{
               backgroundColor: "var(--color-bg-secondary,#eef3f1)",
               border: "1px solid var(--color-border-primary,#e6e8e7)",
@@ -176,14 +176,14 @@ export default function ChapterAutomations() {
         {/* Security panel */}
         <Reveal delay={0.2}>
           <div
-            className="rounded-3xl p-8 md:p-10"
+            className="rounded-3xl p-8 md:p-10 max-sm:p-5"
             style={{
               backgroundColor: "#ffffff",
               border: "1px solid var(--color-border-primary,#e6e8e7)",
               boxShadow: "0 2px 8px -4px rgba(5,25,18,0.04)",
             }}
           >
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-10 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-10 max-md:gap-6 items-start">
               {/* Left: copy */}
               <div>
                 <p
@@ -341,12 +341,13 @@ function WorkflowCard({
 function PermissionMatrix() {
   return (
     <div
-      className="rounded-2xl overflow-hidden"
+      className="rounded-2xl overflow-hidden max-md:overflow-x-auto"
       style={{
         backgroundColor: "#fafbfb",
         border: "1px solid rgba(230,232,231,0.9)",
       }}
     >
+    <div className="max-md:min-w-[640px]">
       <div
         className="grid items-center text-[10px] font-semibold uppercase tracking-[0.1em] px-4 py-3"
         style={{
@@ -404,6 +405,7 @@ function PermissionMatrix() {
           ))}
         </motion.div>
       ))}
+    </div>
     </div>
   );
 }

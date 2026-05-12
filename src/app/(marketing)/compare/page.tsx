@@ -41,14 +41,14 @@ export default function ComparePage() {
   return (
     <>
       <section
-        className="py-32"
+        className="py-32 max-md:py-20 max-sm:py-16"
         style={{
           background:
             "radial-gradient(120% 100% at 50% 0%, #1a4a37 0%, #051912 60%)",
           color: "#fff",
         }}
       >
-        <div className="max-w-[1100px] mx-auto px-6 text-center">
+        <div className="max-w-[1100px] mx-auto px-6 max-sm:px-4 text-center">
           <p
             className="text-sm uppercase tracking-[0.2em] mb-6"
             style={{ color: "#98cdb8" }}
@@ -56,7 +56,7 @@ export default function ComparePage() {
             Comparisons
           </p>
           <h1
-            className="text-5xl md:text-7xl font-medium leading-[1.05] mb-6"
+            className="text-5xl max-sm:text-4xl md:text-7xl font-medium leading-[1.05] mb-6"
             style={{ letterSpacing: "-0.035em" }}
           >
             Honest comparisons, not puffery.
@@ -71,8 +71,8 @@ export default function ComparePage() {
         </div>
       </section>
 
-      <section className="py-24 bg-white">
-        <div className="max-w-[1100px] mx-auto px-6">
+      <section className="py-24 max-md:py-16 bg-white">
+        <div className="max-w-[1100px] mx-auto px-6 max-sm:px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {COMPETITORS.map((c) => (
               <Link

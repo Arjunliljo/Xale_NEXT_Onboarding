@@ -21,6 +21,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import dynamic from "next/dynamic";
 import { AnimatePresence, motion } from "motion/react";
+import { useIsMobile } from "@/src/hooks/useMediaQuery";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -56,12 +57,14 @@ export default function PipelineStory() {
   const sectionRef = useRef<HTMLElement>(null);
   const progressRef = useRef(0);
   const [phase, setPhase] = useState(0);
+  const isMobile = useIsMobile();
 
   useGSAP(
     () => {
       if (typeof window === "undefined") return;
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (reduce) return;
+      const mobile = window.matchMedia("(max-width: 768px)").matches;
+      if (reduce || mobile) return;
 
       const ctx = gsap.context(() => {
         ScrollTrigger.create({
@@ -87,6 +90,66 @@ export default function PipelineStory() {
     },
     { scope: sectionRef }
   );
+
+  if (isMobile) {
+    return (
+      <section
+        data-nav-theme="dark"
+        className="relative overflow-hidden py-16"
+        style={{
+          backgroundColor: "#020c08",
+          backgroundImage:
+            "radial-gradient(70% 55% at 50% 50%, rgba(14,50,37,0.9) 0%, transparent 75%)",
+          color: "#fff",
+        }}
+      >
+        <div className="relative z-10 max-w-[1200px] mx-auto px-4 flex flex-col gap-10">
+          <div className="flex justify-center">
+            <span
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs text-center"
+              style={{
+                border: "1px solid rgba(152, 205, 184, 0.25)",
+                backgroundColor: "rgba(49,155,114,0.08)",
+                color: "rgba(255,255,255,0.85)",
+                backdropFilter: "blur(8px)",
+              }}
+            >
+              <span
+                className="w-1.5 h-1.5 rounded-full"
+                style={{
+                  backgroundColor: "#319b72",
+                  boxShadow: "0 0 8px #319b72",
+                }}
+              />
+              One lead. Four phases.
+            </span>
+          </div>
+          {PHASES.map((p, i) => (
+            <div key={i} className="rounded-2xl p-6" style={{ border: "1px solid rgba(255,255,255,0.08)", backgroundColor: "rgba(255,255,255,0.03)" }}>
+              <p
+                className="text-xs uppercase tracking-[0.2em] mb-3"
+                style={{ color: "#98cdb8" }}
+              >
+                {p.eyebrow}
+              </p>
+              <h2
+                className="text-2xl font-medium leading-tight mb-3"
+                style={{ letterSpacing: "-0.025em" }}
+              >
+                {p.title}
+              </h2>
+              <p
+                className="text-sm leading-relaxed"
+                style={{ color: "rgba(255,255,255,0.7)" }}
+              >
+                {p.body}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section

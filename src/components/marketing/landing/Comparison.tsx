@@ -41,9 +41,9 @@ function Cell({ value }: { value: string | boolean }) {
 
 export default function Comparison() {
   return (
-    <section className="py-32" style={{ backgroundColor: "#ffffff" }}>
-      <div className="max-w-[1100px] mx-auto px-6">
-        <div className="text-center mb-16">
+    <section className="py-32 max-md:py-20 max-sm:py-16" style={{ backgroundColor: "#ffffff" }}>
+      <div className="max-w-[1100px] mx-auto px-6 max-sm:px-4">
+        <div className="text-center mb-16 max-md:mb-10">
           <Reveal>
             <p
               className="text-sm uppercase tracking-[0.2em] mb-6"
@@ -54,7 +54,7 @@ export default function Comparison() {
           </Reveal>
           <Reveal delay={0.05}>
             <h2
-              className="text-4xl md:text-5xl font-medium leading-[1.05] mb-6 max-w-3xl mx-auto"
+              className="text-4xl max-sm:text-3xl md:text-5xl font-medium leading-[1.05] mb-6 max-w-3xl mx-auto"
               style={{
                 letterSpacing: "-0.03em",
                 color: "var(--color-text-primary,#1e302a)",
@@ -67,13 +67,13 @@ export default function Comparison() {
 
         <Reveal delay={0.1}>
           <div
-            className="rounded-2xl overflow-hidden"
+            className="rounded-2xl overflow-hidden max-md:overflow-x-auto"
             style={{
               border: "1px solid var(--color-border-primary,#e6e8e7)",
               backgroundColor: "#ffffff",
             }}
           >
-            <table className="w-full">
+            <table className="w-full max-md:min-w-[640px]">
               <thead>
                 <tr
                   style={{

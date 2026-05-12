@@ -4,13 +4,13 @@ import CountUp from "../motion/CountUp";
 export default function Numbers() {
   return (
     <section
-      className="py-32"
+      className="py-32 max-md:py-20 max-sm:py-16"
       style={{
         background:
           "radial-gradient(120% 80% at 50% 100%, #eef3f1 0%, #ffffff 60%)",
       }}
     >
-      <div className="max-w-[1200px] mx-auto px-6">
+      <div className="max-w-[1200px] mx-auto px-6 max-sm:px-4">
         <Reveal>
           <p
             className="text-center text-sm uppercase tracking-[0.2em] mb-16"
@@ -19,7 +19,7 @@ export default function Numbers() {
             By the numbers
           </p>
         </Reveal>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-4 max-md:gap-8">
           {[
             { value: 4.2, suffix: "M", label: "Leads managed monthly across Xale teams" },
             { value: 12, suffix: "M", label: "WhatsApp messages sent through Xale every month" },
@@ -28,7 +28,7 @@ export default function Numbers() {
             <Reveal key={i} delay={i * 0.1}>
               <div className="text-center">
                 <div
-                  className="text-7xl md:text-8xl font-thin mb-3"
+                  className="text-7xl max-sm:text-6xl md:text-8xl font-thin mb-3"
                   style={{
                     color: "var(--color-text-primary,#1e302a)",
                     letterSpacing: "-0.04em",

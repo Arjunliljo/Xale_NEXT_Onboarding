@@ -27,7 +27,7 @@ export default function Solution() {
     <section
       ref={sectionRef}
       data-nav-theme="dark"
-      className="relative overflow-hidden"
+      className="story-section relative overflow-hidden"
       style={{
         backgroundColor: "#020c08",
         backgroundImage:
@@ -51,8 +51,8 @@ export default function Solution() {
       />
 
       {/* Top header */}
-      <div className="absolute inset-x-0 top-0 z-10 pt-16 md:pt-24">
-        <div className="max-w-[1100px] mx-auto px-6 text-center">
+      <div className="absolute inset-x-0 top-0 z-10 pt-16 md:pt-24 max-sm:pt-12">
+        <div className="max-w-[1100px] mx-auto px-6 max-sm:px-4 text-center">
           <Reveal>
             <p
               className="text-sm uppercase tracking-[0.2em] mb-4"
@@ -63,7 +63,7 @@ export default function Solution() {
           </Reveal>
           <Reveal delay={0.05}>
             <h2
-              className="text-4xl md:text-6xl font-medium leading-[1.05] mb-4"
+              className="text-4xl max-sm:text-3xl md:text-6xl font-medium leading-[1.05] mb-4"
               style={{ letterSpacing: "-0.03em", color: "#ffffff" }}
             >
               Every channel.

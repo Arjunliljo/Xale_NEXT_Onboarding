@@ -25,7 +25,7 @@ export default function HowItWorks() {
   return (
     <section
       data-nav-theme="dark"
-      className="py-32"
+      className="py-32 max-md:py-20 max-sm:py-16"
       style={{
         backgroundColor: "#020c08",
         backgroundImage:
@@ -33,8 +33,8 @@ export default function HowItWorks() {
         color: "#fff",
       }}
     >
-      <div className="max-w-[1200px] mx-auto px-6">
-        <div className="text-center mb-20">
+      <div className="max-w-[1200px] mx-auto px-6 max-sm:px-4">
+        <div className="text-center mb-20 max-md:mb-12">
           <Reveal>
             <p
               className="text-sm uppercase tracking-[0.2em] mb-6"
@@ -45,7 +45,7 @@ export default function HowItWorks() {
           </Reveal>
           <Reveal delay={0.05}>
             <h2
-              className="text-4xl md:text-6xl font-medium leading-[1.05] mb-6 max-w-3xl mx-auto"
+              className="text-4xl max-sm:text-3xl md:text-6xl font-medium leading-[1.05] mb-6 max-w-3xl mx-auto"
               style={{ letterSpacing: "-0.03em" }}
             >
               Up and running in three steps.
@@ -61,7 +61,7 @@ export default function HowItWorks() {
           </Reveal>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-md:gap-10 relative">
           {/* Connecting line */}
           <div
             aria-hidden

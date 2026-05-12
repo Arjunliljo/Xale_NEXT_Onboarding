@@ -18,6 +18,7 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useReducedMotion } from "motion/react";
+import { useIsMobile } from "@/src/hooks/useMediaQuery";
 
 type Stat = {
   value: string;
@@ -59,11 +60,82 @@ const STATS: Stat[] = [
 export default function QuantifiedParallax() {
   const sectionRef = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
+  const isMobile = useIsMobile();
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
   });
+
+  if (isMobile) {
+    return (
+      <section
+        className="relative overflow-hidden py-16"
+        style={{
+          background:
+            "radial-gradient(120% 80% at 50% 0%, #ffffff 0%, #f4f9f6 55%, #e6efea 100%)",
+        }}
+      >
+        <div className="max-w-[1100px] mx-auto px-4 relative z-10">
+          <div className="flex justify-center mb-8">
+            <span
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm"
+              style={{
+                border: "1px solid rgba(49,155,114,0.18)",
+                backgroundColor: "#ffffff",
+                color: "var(--color-text-secondary,#505e59)",
+                boxShadow: "0 4px 16px -4px rgba(21,101,72,0.12)",
+              }}
+            >
+              <span
+                className="w-1.5 h-1.5 rounded-full"
+                style={{
+                  backgroundColor: "#319b72",
+                  boxShadow: "0 0 10px #319b72, 0 0 4px #319b72",
+                }}
+              />
+              The impact, quantified
+            </span>
+          </div>
+          <div className="flex flex-col gap-4">
+            {STATS.map((stat, i) => (
+              <div
+                key={i}
+                className="relative rounded-2xl px-6 py-5"
+                style={{
+                  background:
+                    "linear-gradient(135deg, #ffffff 0%, #f6faf8 100%)",
+                  border: "1px solid rgba(230,232,231,0.9)",
+                  boxShadow:
+                    "0 12px 32px -12px rgba(21,101,72,0.18), 0 4px 12px -4px rgba(21,101,72,0.08)",
+                }}
+              >
+                <div
+                  className="text-4xl font-semibold mb-2"
+                  style={{
+                    letterSpacing: "-0.035em",
+                    background:
+                      "linear-gradient(135deg, #0e3a2a 0%, #156548 40%, #319b72 100%)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    backgroundClip: "text",
+                  }}
+                >
+                  {stat.value}
+                </div>
+                <p
+                  className="text-sm leading-relaxed"
+                  style={{ color: "var(--color-text-gray,#6f6f6f)" }}
+                >
+                  {stat.label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   // Background word parallaxes upward slightly faster than the cards
   const bgY = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [200, -200]);

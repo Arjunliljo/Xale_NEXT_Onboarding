@@ -11,15 +11,15 @@ export default function IndustryTemplate({ industry }: { industry: Industry }) {
     <>
       {/* Hero */}
       <section
-        className="relative py-32 overflow-hidden"
+        className="relative py-32 max-md:py-20 max-sm:py-16 overflow-hidden"
         style={{
           background:
             "radial-gradient(120% 100% at 50% 0%, #1a4a37 0%, #051912 60%, #020c08 100%)",
           color: "#fff",
         }}
       >
-        <div className="max-w-[1100px] mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="max-w-[1100px] mx-auto px-6 max-sm:px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-md:gap-8 items-center">
             <div>
               <Reveal>
                 <p
@@ -31,7 +31,7 @@ export default function IndustryTemplate({ industry }: { industry: Industry }) {
               </Reveal>
               <Reveal delay={0.05}>
                 <h1
-                  className="text-5xl md:text-6xl font-medium leading-[1.05] mb-6"
+                  className="text-5xl max-sm:text-4xl md:text-6xl font-medium leading-[1.05] mb-6"
                   style={{ letterSpacing: "-0.035em" }}
                 >
                   {industry.hero.title}
@@ -68,14 +68,14 @@ export default function IndustryTemplate({ industry }: { industry: Industry }) {
 
       {/* Metrics */}
       {industry.metrics && (
-        <section className="py-20 bg-white">
-          <div className="max-w-[1100px] mx-auto px-6">
+        <section className="py-20 max-md:py-12 bg-white">
+          <div className="max-w-[1100px] mx-auto px-6 max-sm:px-4">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {industry.metrics.map((m, i) => (
                 <Reveal key={i} delay={i * 0.08}>
                   <div className="text-center">
                     <div
-                      className="text-6xl font-medium mb-3"
+                      className="text-6xl max-sm:text-5xl font-medium mb-3"
                       style={{
                         letterSpacing: "-0.03em",
                         color: "var(--color-success,#156548)",
@@ -100,7 +100,7 @@ export default function IndustryTemplate({ industry }: { industry: Industry }) {
 
       {/* Pipeline */}
       <section
-        className="py-24"
+        className="py-24 max-md:py-16"
         style={{ backgroundColor: "var(--color-bg-secondary,#eef3f1)" }}
       >
         <div className="max-w-[1100px] mx-auto px-6">
@@ -168,8 +168,8 @@ export default function IndustryTemplate({ industry }: { industry: Industry }) {
       </section>
 
       {/* Features */}
-      <section className="py-24 bg-white">
-        <div className="max-w-[1100px] mx-auto px-6">
+      <section className="py-24 max-md:py-16 bg-white">
+        <div className="max-w-[1100px] mx-auto px-6 max-sm:px-4">
           <Reveal>
             <h2
               className="text-3xl md:text-4xl font-medium mb-4 text-center"
@@ -220,10 +220,10 @@ export default function IndustryTemplate({ industry }: { industry: Industry }) {
 
       {/* Integrations */}
       <section
-        className="py-24"
+        className="py-24 max-md:py-16"
         style={{ backgroundColor: "var(--color-bg-secondary,#eef3f1)" }}
       >
-        <div className="max-w-[1100px] mx-auto px-6 text-center">
+        <div className="max-w-[1100px] mx-auto px-6 max-sm:px-4 text-center">
           <Reveal>
             <h2
               className="text-3xl md:text-4xl font-medium mb-12"
@@ -257,8 +257,8 @@ export default function IndustryTemplate({ industry }: { industry: Industry }) {
 
       {/* Testimonial */}
       {industry.testimonial && (
-        <section className="py-24 bg-white">
-          <div className="max-w-[800px] mx-auto px-6">
+        <section className="py-24 max-md:py-16 bg-white">
+          <div className="max-w-[800px] mx-auto px-6 max-sm:px-4">
             <Reveal>
               <figure className="text-center">
                 <blockquote
@@ -287,14 +287,14 @@ export default function IndustryTemplate({ industry }: { industry: Industry }) {
 
       {/* CTA */}
       <section
-        className="py-24"
+        className="py-24 max-md:py-16"
         style={{
           background:
             "radial-gradient(120% 100% at 50% 100%, #1a4a37 0%, #051912 60%)",
           color: "#fff",
         }}
       >
-        <div className="max-w-[800px] mx-auto px-6 text-center">
+        <div className="max-w-[800px] mx-auto px-6 max-sm:px-4 text-center">
           <Reveal>
             <h2
               className="text-3xl md:text-5xl font-medium mb-6"

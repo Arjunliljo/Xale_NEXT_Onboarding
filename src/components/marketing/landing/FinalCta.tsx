@@ -8,7 +8,7 @@ export default function FinalCta() {
   return (
     <section
       data-nav-theme="dark"
-      className="relative py-32 overflow-hidden"
+      className="relative py-32 max-md:py-20 max-sm:py-16 overflow-hidden"
       style={{
         backgroundColor: "#020c08",
         backgroundImage:
@@ -42,10 +42,10 @@ export default function FinalCta() {
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      <div className="relative max-w-[1100px] mx-auto px-6 text-center">
+      <div className="relative max-w-[1100px] mx-auto px-6 max-sm:px-4 text-center">
         <Reveal>
           <h2
-            className="text-5xl md:text-7xl font-medium leading-[1.05] mb-6"
+            className="text-5xl max-sm:text-4xl md:text-7xl font-medium leading-[1.05] mb-6"
             style={{ letterSpacing: "-0.035em" }}
           >
             Ready to grow your pipeline?

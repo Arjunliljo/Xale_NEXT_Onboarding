@@ -31,7 +31,7 @@ export default function Testimonials() {
   return (
     <section
       data-nav-theme="dark"
-      className="py-32"
+      className="py-32 max-md:py-20 max-sm:py-16"
       style={{
         backgroundColor: "#020c08",
         backgroundImage:
@@ -39,8 +39,8 @@ export default function Testimonials() {
         color: "#fff",
       }}
     >
-      <div className="max-w-[1100px] mx-auto px-6">
-        <div className="text-center mb-16">
+      <div className="max-w-[1100px] mx-auto px-6 max-sm:px-4">
+        <div className="text-center mb-16 max-md:mb-10">
           <Reveal>
             <p
               className="text-sm uppercase tracking-[0.2em] mb-6"

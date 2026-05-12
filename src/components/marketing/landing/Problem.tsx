@@ -77,7 +77,7 @@ export default function Problem() {
     <section
       ref={sectionRef}
       data-nav-theme="dark"
-      className="relative py-32 overflow-hidden"
+      className="relative py-32 max-md:py-20 max-sm:py-16 overflow-hidden max-md:[min-height:auto]"
       style={{
         backgroundColor: "#020c08",
         backgroundImage:
@@ -98,7 +98,7 @@ export default function Problem() {
         }}
       />
 
-      <div className="relative z-10 max-w-[1100px] mx-auto px-6 text-center">
+      <div className="relative z-10 max-w-[1100px] mx-auto px-6 max-sm:px-4 text-center">
         <Reveal>
           <p
             className="text-sm uppercase tracking-[0.2em] mb-6"
@@ -109,7 +109,7 @@ export default function Problem() {
         </Reveal>
         <Reveal delay={0.1}>
           <h2
-            className="text-4xl md:text-6xl font-medium leading-[1.05] mb-6"
+            className="text-4xl max-sm:text-3xl md:text-6xl font-medium leading-[1.05] mb-6"
             style={{ letterSpacing: "-0.03em" }}
           >
             Your leads are leaking.
@@ -126,7 +126,7 @@ export default function Problem() {
           </p>
         </Reveal>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-sm:gap-3 max-w-3xl mx-auto">
           {TOOLS.map((tool, i) => (
             <motion.div
               key={tool.name}

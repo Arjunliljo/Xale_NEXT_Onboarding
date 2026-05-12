@@ -77,7 +77,7 @@ export default function Hero() {
         transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      <div className="relative max-w-[1200px] mx-auto px-6 pt-28 md:pt-40 pb-32 md:pb-44 text-center">
+      <div className="relative max-w-[1200px] mx-auto px-6 max-sm:px-4 pt-28 md:pt-40 max-sm:pt-20 pb-32 md:pb-44 max-sm:pb-20 text-center">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -98,7 +98,7 @@ export default function Hero() {
         </motion.div>
 
         <h1
-          className="text-5xl md:text-7xl lg:text-[88px] font-medium leading-[1.02]"
+          className="text-5xl max-sm:text-[2.25rem] md:text-7xl lg:text-[88px] font-medium leading-[1.02]"
           style={{ letterSpacing: "-0.035em" }}
         >
           <SplitText
@@ -164,7 +164,7 @@ export default function Hero() {
       </div>
 
       {/* Mock kanban floating preview */}
-      <div className="relative max-w-[1100px] mx-auto px-6 -mt-8 md:-mt-12 pb-24">
+      <div className="relative max-w-[1100px] mx-auto px-6 max-sm:px-4 -mt-8 md:-mt-12 pb-24 max-sm:pb-16">
         <motion.div
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
@@ -193,7 +193,7 @@ export default function Hero() {
               app.xale.in / pipeline
             </span>
           </div>
-          <div className="grid grid-cols-4 gap-3 p-4">
+          <div className="grid grid-cols-4 max-md:grid-cols-2 max-sm:grid-cols-1 gap-3 p-4">
             {[
               { stage: "New", count: 14, color: "#98cdb8" },
               { stage: "Qualified", count: 8, color: "#6fb99c" },

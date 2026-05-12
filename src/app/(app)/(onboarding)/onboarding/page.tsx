@@ -28,12 +28,12 @@ export default function OnBoarding() {
 
       <p
         style={{ marginTop: "-2rem", marginBottom: "5rem" }}
-        className="text-b2 text-var(--color-text-gray) flex items-center justify-center "
+        className="text-b2 text-var(--color-text-gray) flex items-center justify-center text-center max-md:!mb-12 max-sm:!mb-8 max-sm:px-4"
       >
         This helps us to setup your CRM right away
       </p>
 
-      <div className="w-full px-0 md:px-[5rem] flex justify-center flex-col items-center">
+      <div className="w-full px-0 max-md:px-3 md:px-[5rem] flex justify-center flex-col items-center">
         <OnBoardingInputs
           Icon={CompanyIcon}
           type="input"

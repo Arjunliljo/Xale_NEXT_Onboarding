@@ -17,11 +17,11 @@ const MESSAGES = [
 export default function ChapterWhatsApp() {
   return (
     <section
-      className="py-32"
+      className="py-32 max-md:py-20 max-sm:py-16"
       style={{ backgroundColor: "#ffffff" }}
     >
-      <div className="max-w-[1200px] mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div className="max-w-[1200px] mx-auto px-6 max-sm:px-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 max-md:gap-10 items-center">
           {/* Copy */}
           <div className="order-2 lg:order-1">
             <Reveal>
@@ -34,7 +34,7 @@ export default function ChapterWhatsApp() {
             </Reveal>
             <Reveal delay={0.05}>
               <h2
-                className="text-4xl md:text-5xl font-medium leading-[1.05] mb-6"
+                className="text-4xl max-sm:text-3xl md:text-5xl font-medium leading-[1.05] mb-6"
                 style={{
                   letterSpacing: "-0.03em",
                   color: "var(--color-text-primary,#1e302a)",
@@ -82,7 +82,7 @@ export default function ChapterWhatsApp() {
           <div className="order-1 lg:order-2 flex justify-center">
             <Reveal delay={0.1}>
               <div
-                className="relative rounded-[40px] p-3"
+                className="relative rounded-[40px] p-3 max-sm:[width:100%] max-sm:[max-width:280px]"
                 style={{
                   width: "320px",
                   background:
@@ -92,7 +92,7 @@ export default function ChapterWhatsApp() {
                 }}
               >
                 <div
-                  className="rounded-[32px] overflow-hidden"
+                  className="rounded-[32px] overflow-hidden max-sm:[height:480px]"
                   style={{ backgroundColor: "#0a0a0a", height: "560px" }}
                 >
                   {/* Status bar */}

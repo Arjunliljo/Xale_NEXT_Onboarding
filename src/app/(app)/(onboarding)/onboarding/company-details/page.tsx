@@ -9,7 +9,7 @@ export default function CompanyDetails() {
   return (
 
     <div
-      className={`w-full flex flex-col items-center justify-center grow  z-10`}
+      className={`w-full flex flex-col items-center justify-center grow z-10 max-md:px-3`}
     >
       {/* Header Section */}
       <HeadingGradientTextsGreen
@@ -19,7 +19,7 @@ export default function CompanyDetails() {
       />
       <p
         style={{ marginTop: "-2rem", marginBottom: "5rem" }}
-        className="text-b2 text-var(--color-text-gray) flex items-center justify-center"
+        className="text-b2 text-var(--color-text-gray) flex items-center justify-center text-center max-md:!mb-12 max-sm:!mb-8 max-sm:px-4"
       >
         Add your logo and address to complete your personalized setup
       </p>

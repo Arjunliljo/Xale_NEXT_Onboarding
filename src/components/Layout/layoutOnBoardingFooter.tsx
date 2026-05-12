@@ -109,9 +109,9 @@ function LayoutOnboardingFooter() {
       }`}
     >
       <div
-        className={`w-[90vw] m-auto mb-10 px-4 sm:px-6 ${
+        className={`w-[90vw] max-sm:w-[94vw] m-auto mb-10 max-sm:mb-6 px-4 sm:px-6 max-sm:px-2 ${
           isMobileOrTablet
-            ? "flex flex-row items-center justify-between gap-4"
+            ? "flex flex-row items-center justify-between gap-4 max-sm:gap-2"
             : "grid grid-cols-3 items-end gap-8"
         }`}
         style={!isMobileOrTablet ? { gridTemplateColumns: "1fr auto 1fr" } : {}}
@@ -120,7 +120,7 @@ function LayoutOnboardingFooter() {
           <LightGreenBtn
             style={{
               width: isMobileOrTablet ? "auto" : "15rem",
-              minWidth: isMobileOrTablet ? "120px" : "15rem",
+              minWidth: isMobileOrTablet ? "100px" : "15rem",
               opacity: isFirstStep ? "0" : "1",
               pointerEvents: isFirstStep ? "none" : "auto",
             }}
@@ -149,7 +149,7 @@ function LayoutOnboardingFooter() {
           <PrimaryButton
             style={{
               width: isMobileOrTablet ? "auto" : "15rem",
-              minWidth: isMobileOrTablet ? "7.5rem" : "15rem",
+              minWidth: isMobileOrTablet ? "6.5rem" : "15rem",
             }}
             onClick={handleNext}
             disabled={isSavingProfile}

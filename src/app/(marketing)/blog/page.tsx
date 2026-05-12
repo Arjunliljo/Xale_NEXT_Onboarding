@@ -17,9 +17,9 @@ export default async function BlogIndexPage() {
   const posts = await getAllPosts();
 
   return (
-    <div className="max-w-[1100px] mx-auto px-6 pt-24 pb-32">
-      <header className="mb-16">
-        <h1 className="text-5xl md:text-6xl font-medium tracking-tight" style={{ letterSpacing: "-0.03em", color: "var(--color-text-primary,#1e302a)" }}>
+    <div className="max-w-[1100px] mx-auto px-6 max-sm:px-4 pt-24 pb-32 max-md:pt-16 max-md:pb-20">
+      <header className="mb-16 max-md:mb-10">
+        <h1 className="text-5xl max-sm:text-4xl md:text-6xl font-medium tracking-tight" style={{ letterSpacing: "-0.03em", color: "var(--color-text-primary,#1e302a)" }}>
           The Xale blog
         </h1>
         <p className="mt-4 text-lg" style={{ color: "var(--color-text-gray,#6f6f6f)" }}>
@@ -30,7 +30,7 @@ export default async function BlogIndexPage() {
       {posts.length === 0 ? (
         <p style={{ color: "var(--color-text-gray,#6f6f6f)" }}>No posts yet — check back soon.</p>
       ) : (
-        <ul className="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-12 max-md:gap-8">
           {posts.map((post) => (
             <li key={post.slug}>
               <Link href={`/blog/${post.slug}`} className="group block">

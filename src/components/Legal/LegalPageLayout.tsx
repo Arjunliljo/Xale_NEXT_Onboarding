@@ -44,6 +44,7 @@ export default function LegalPageLayout({
 
   return (
     <div
+      className="legal-page"
       style={{
         minHeight: "100vh",
         background: `radial-gradient(124.81% 124.81% at 50% 124.81%, #fff 73.57%, #eaf5f1 93.99%, #f0f8f5 100%)`,
@@ -51,6 +52,7 @@ export default function LegalPageLayout({
       }}
     >
       <div
+        className="legal-header"
         style={{
           backgroundColor: C.black10,
           padding: "14px 32px",
@@ -98,6 +100,7 @@ export default function LegalPageLayout({
       </div>
 
       <div
+        className="legal-title"
         style={{
           background: `linear-gradient(135deg, ${C.black10} 0%, ${C.green9} 100%)`,
           padding: "52px 24px 60px",
@@ -105,6 +108,7 @@ export default function LegalPageLayout({
         }}
       >
         <h1
+          className="legal-title-h1"
           style={{
             fontSize: "34px",
             fontWeight: 600,
@@ -128,6 +132,7 @@ export default function LegalPageLayout({
       </div>
 
       <div
+        className="legal-nav"
         style={{
           backgroundColor: "#fff",
           borderBottom: `1px solid ${C.borderPrimary}`,
@@ -137,12 +142,14 @@ export default function LegalPageLayout({
         }}
       >
         <div
+          className="legal-nav-inner"
           style={{
             maxWidth: "780px",
             margin: "0 auto",
             padding: "0 24px",
             display: "flex",
             gap: "0",
+            overflowX: "auto",
           }}
         >
           {NAV_ITEMS.map((item) => {
@@ -171,6 +178,7 @@ export default function LegalPageLayout({
       </div>
 
       <div
+        className="legal-content"
         style={{
           maxWidth: "780px",
           margin: "0 auto",
@@ -178,6 +186,7 @@ export default function LegalPageLayout({
         }}
       >
         <div
+          className="legal-content-card"
           style={{
             backgroundColor: "#fff",
             borderRadius: "12px",
@@ -205,6 +214,7 @@ export default function LegalPageLayout({
       </div>
 
       <div
+        className="legal-footer"
         style={{
           borderTop: `1px solid ${C.borderPrimary}`,
           backgroundColor: "#fff",

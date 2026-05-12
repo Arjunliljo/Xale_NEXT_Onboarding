@@ -267,14 +267,14 @@ export default function PricingContent() {
 
       {/* Hero */}
       <section
-        className="relative py-32 overflow-hidden"
+        className="relative py-32 max-md:py-20 max-sm:py-16 overflow-hidden"
         style={{
           background:
             "radial-gradient(120% 100% at 50% 0%, #1a4a37 0%, #051912 60%, #020c08 100%)",
           color: "#fff",
         }}
       >
-        <div className="max-w-[1100px] mx-auto px-6 text-center">
+        <div className="max-w-[1100px] mx-auto px-6 max-sm:px-4 text-center">
           <Reveal>
             <p
               className="text-sm uppercase tracking-[0.2em] mb-6"
@@ -285,7 +285,7 @@ export default function PricingContent() {
           </Reveal>
           <Reveal delay={0.05}>
             <h1
-              className="text-5xl md:text-7xl font-medium leading-[1.05] mb-6"
+              className="text-5xl max-sm:text-4xl md:text-7xl font-medium leading-[1.05] mb-6"
               style={{ letterSpacing: "-0.035em" }}
             >
               Simple pricing that scales with you.
@@ -334,9 +334,9 @@ export default function PricingContent() {
       </section>
 
       {/* Plan cards */}
-      <section className="py-20 bg-white">
-        <div className="max-w-[1200px] mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 -mt-32 relative z-10">
+      <section className="py-20 max-md:py-12 bg-white">
+        <div className="max-w-[1200px] mx-auto px-6 max-sm:px-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 -mt-32 max-md:-mt-20 relative z-10">
             {PLANS.map((plan, i) => (
               <Reveal key={plan.name} delay={i * 0.06}>
                 <PlanCard plan={plan} isYearly={isYearly} />
@@ -347,8 +347,8 @@ export default function PricingContent() {
       </section>
 
       {/* Comparison table */}
-      <section className="py-24" style={{ backgroundColor: "var(--color-bg-secondary,#eef3f1)" }}>
-        <div className="max-w-[1100px] mx-auto px-6">
+      <section className="py-24 max-md:py-16" style={{ backgroundColor: "var(--color-bg-secondary,#eef3f1)" }}>
+        <div className="max-w-[1100px] mx-auto px-6 max-sm:px-4">
           <Reveal>
             <h2
               className="text-3xl md:text-4xl font-medium text-center mb-12"
@@ -379,7 +379,8 @@ export default function PricingContent() {
                 >
                   {section.category}
                 </div>
-                <table className="w-full">
+                <div className="max-md:overflow-x-auto">
+                <table className="w-full max-md:min-w-[520px]">
                   <thead>
                     <tr>
                       <th className="p-0"></th>
@@ -451,6 +452,7 @@ export default function PricingContent() {
                     ))}
                   </tbody>
                 </table>
+                </div>
               </div>
             </Reveal>
           ))}
@@ -458,8 +460,8 @@ export default function PricingContent() {
       </section>
 
       {/* FAQ */}
-      <section className="py-24 bg-white">
-        <div className="max-w-[800px] mx-auto px-6">
+      <section className="py-24 max-md:py-16 bg-white">
+        <div className="max-w-[800px] mx-auto px-6 max-sm:px-4">
           <Reveal>
             <h2
               className="text-3xl md:text-4xl font-medium text-center mb-12"
@@ -527,14 +529,14 @@ export default function PricingContent() {
 
       {/* Enterprise CTA */}
       <section
-        className="py-24"
+        className="py-24 max-md:py-16"
         style={{
           background:
             "radial-gradient(120% 100% at 50% 100%, #1a4a37 0%, #051912 60%)",
           color: "#fff",
         }}
       >
-        <div className="max-w-[800px] mx-auto px-6 text-center">
+        <div className="max-w-[800px] mx-auto px-6 max-sm:px-4 text-center">
           <Reveal>
             <h2
               className="text-3xl md:text-4xl font-medium mb-4"

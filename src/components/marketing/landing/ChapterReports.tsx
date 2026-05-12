@@ -8,7 +8,7 @@ export default function ChapterReports() {
   return (
     <section
       data-nav-theme="dark"
-      className="py-32"
+      className="py-32 max-md:py-20 max-sm:py-16"
       style={{
         backgroundColor: "#020c08",
         backgroundImage:
@@ -16,8 +16,8 @@ export default function ChapterReports() {
         color: "#fff",
       }}
     >
-      <div className="max-w-[1200px] mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div className="max-w-[1200px] mx-auto px-6 max-sm:px-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 max-md:gap-10 items-center">
           <div>
             <Reveal>
               <p
@@ -29,7 +29,7 @@ export default function ChapterReports() {
             </Reveal>
             <Reveal delay={0.05}>
               <h2
-                className="text-4xl md:text-5xl font-medium leading-[1.05] mb-6"
+                className="text-4xl max-sm:text-3xl md:text-5xl font-medium leading-[1.05] mb-6"
                 style={{ letterSpacing: "-0.03em" }}
               >
                 Numbers that actually mean something.

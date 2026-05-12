@@ -30,7 +30,7 @@ export default function SelectPlan() {
     >
       <div className="flex flex-col items-center shrink-0">
         <HeadingGradientTextsGreen top="" bottom="Choose Your Plan" />
-        <p className="text-b2 text-[var(--color-text-gray)] flex items-center justify-center mt-[-2rem] mb-8">
+        <p className="text-b2 text-[var(--color-text-gray)] flex items-center justify-center mt-[-2rem] mb-8 text-center max-md:px-4 max-sm:mb-6">
           Pick a plan that fits your companies needs. Don't Worry - you can
           always upgrade later
         </p>

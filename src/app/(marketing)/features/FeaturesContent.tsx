@@ -138,7 +138,7 @@ export default function FeaturesContent() {
     <>
       {/* Hero */}
       <section
-        className="relative py-32 overflow-hidden"
+        className="relative py-32 max-md:py-20 max-sm:py-16 overflow-hidden"
         style={{
           background:
             "radial-gradient(120% 100% at 50% 0%, #1a4a37 0%, #051912 60%, #020c08 100%)",
@@ -159,7 +159,7 @@ export default function FeaturesContent() {
           }}
         />
 
-        <div className="relative z-10 max-w-[1100px] mx-auto px-6 text-center">
+        <div className="relative z-10 max-w-[1100px] mx-auto px-6 max-sm:px-4 text-center">
           <Reveal>
             <p
               className="text-sm uppercase tracking-[0.2em] mb-6"
@@ -170,7 +170,7 @@ export default function FeaturesContent() {
           </Reveal>
           <Reveal delay={0.05}>
             <h1
-              className="text-5xl md:text-7xl font-medium leading-[1.05] mb-6"
+              className="text-5xl max-sm:text-4xl md:text-7xl font-medium leading-[1.05] mb-6"
               style={{ letterSpacing: "-0.035em" }}
             >
               Every feature, in detail.
@@ -196,13 +196,13 @@ export default function FeaturesContent() {
             <section
               key={feat.id}
               id={feat.id}
-              className="py-24"
+              className="py-24 max-md:py-16"
               style={{
                 backgroundColor: isAlt ? "var(--color-bg-secondary,#eef3f1)" : "#ffffff",
               }}
             >
-              <div className="max-w-[1100px] mx-auto px-6">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+              <div className="max-w-[1100px] mx-auto px-6 max-sm:px-4">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 max-md:gap-6">
                   <Reveal className="lg:col-span-5">
                     <p
                       className="text-xs uppercase tracking-[0.2em] mb-4"
@@ -268,17 +268,17 @@ export default function FeaturesContent() {
 
       {/* CTA */}
       <section
-        className="py-24"
+        className="py-24 max-md:py-16"
         style={{
           background:
             "radial-gradient(120% 100% at 50% 100%, #1a4a37 0%, #051912 60%)",
           color: "#fff",
         }}
       >
-        <div className="max-w-[800px] mx-auto px-6 text-center">
+        <div className="max-w-[800px] mx-auto px-6 max-sm:px-4 text-center">
           <Reveal>
             <h2
-              className="text-4xl md:text-5xl font-medium mb-6"
+              className="text-4xl max-sm:text-3xl md:text-5xl font-medium mb-6"
               style={{ letterSpacing: "-0.03em" }}
             >
               See it for yourself.

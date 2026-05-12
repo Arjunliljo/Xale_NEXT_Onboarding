@@ -11,7 +11,7 @@ export default function PlanToggle({ value, onClick }: PlanToggleProps) {
     <div
       style={{ border: "1px solid var(--color-border-green)" }}
       // grid layout; responsive width with max cap for desktop
-      className="grid grid-cols-2 w-full max-w-[340px] min-w-[260px] h-[52px] min-h-[52px] rounded-[1.3rem] p-1 items-center cursor-pointer text-sm sm:text-base"
+      className="grid grid-cols-2 w-full max-w-[340px] min-w-[260px] max-sm:min-w-0 max-sm:max-w-[300px] h-[52px] min-h-[52px] rounded-[1.3rem] p-1 items-center cursor-pointer text-sm sm:text-base"
     >
       {value ? (
         <>

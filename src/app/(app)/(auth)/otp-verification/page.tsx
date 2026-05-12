@@ -215,7 +215,7 @@ export default function OTPPage() {
 
         <div
           style={{ marginTop: "-2rem", marginBottom: "5rem" }}
-          className="text-b2 text-var(--color-text-gray) flex items-center justify-center flex-col md:flex-row"
+          className="text-b2 text-var(--color-text-gray) flex items-center justify-center flex-col md:flex-row max-md:!mb-12 max-sm:!mb-8 max-sm:px-4 text-center"
         >
           <span>
           We sent a 6-digit code to
@@ -232,7 +232,7 @@ export default function OTPPage() {
 
           {/* OTP Inputs */}
           <div className="flex flex-col w-full">
-            <div className="flex justify-between w-full" style={{ gap: "0.6rem" }}>
+            <div className="flex justify-between w-full max-sm:[gap:0.35rem]" style={{ gap: "0.6rem" }}>
               {otpArray.map((digit, index) => (
                 <input
                   key={index}
@@ -245,7 +245,7 @@ export default function OTPPage() {
                   onChange={(e) => handleChange(e.target as HTMLInputElement, index)}
                   onKeyDown={(e) => handleKeyDown(e, index)}
                   onPaste={handlePaste}
-                  className={`h-12 w-full text-center text-xl md:text-2xl font-medium border rounded-xl outline-none transition-all bg-white
+                  className={`h-12 max-sm:h-11 w-full text-center text-xl md:text-2xl max-sm:text-lg font-medium border rounded-xl outline-none transition-all bg-white
                     ${
                       errors.otp
                         ? "border-[var(--color-error)] ring-1 ring-[var(--color-error)]"
