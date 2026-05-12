@@ -79,7 +79,7 @@ export default function QuantifiedParallax() {
           "radial-gradient(120% 80% at 50% 0%, #ffffff 0%, #f4f9f6 55%, #e6efea 100%)",
       }}
     >
-      {/* Ambient green orbs for depth */}
+      {/* Ambient green orbs for depth (no filter blur — radial-gradient is already soft, much cheaper) */}
       <div
         aria-hidden
         className="absolute pointer-events-none"
@@ -90,7 +90,7 @@ export default function QuantifiedParallax() {
           height: "520px",
           background:
             "radial-gradient(circle, rgba(49,155,114,0.28) 0%, rgba(49,155,114,0) 70%)",
-          filter: "blur(40px)",
+          transform: "translateZ(0)",
         }}
       />
       <div
@@ -103,7 +103,7 @@ export default function QuantifiedParallax() {
           height: "640px",
           background:
             "radial-gradient(circle, rgba(21,101,72,0.22) 0%, rgba(21,101,72,0) 70%)",
-          filter: "blur(50px)",
+          transform: "translateZ(0)",
         }}
       />
       <div
@@ -116,7 +116,7 @@ export default function QuantifiedParallax() {
           height: "560px",
           background:
             "radial-gradient(circle, rgba(152,205,184,0.35) 0%, rgba(152,205,184,0) 70%)",
-          filter: "blur(60px)",
+          transform: "translateZ(0)",
         }}
       />
 
@@ -138,10 +138,10 @@ export default function QuantifiedParallax() {
       {/* Top chip */}
       <div className="relative pt-24 flex justify-center z-10">
         <span
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm backdrop-blur"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm"
           style={{
             border: "1px solid rgba(49,155,114,0.18)",
-            backgroundColor: "rgba(255,255,255,0.72)",
+            backgroundColor: "#ffffff",
             color: "var(--color-text-secondary,#505e59)",
             boxShadow: "0 4px 16px -4px rgba(21,101,72,0.12)",
           }}
@@ -160,7 +160,7 @@ export default function QuantifiedParallax() {
       {/* Massive background word */}
       <motion.div
         aria-hidden
-        style={{ y: bgY, scale: bgScale }}
+        style={{ y: bgY, scale: bgScale, willChange: "transform" }}
         className="absolute inset-0 flex items-center justify-center pointer-events-none"
       >
         <h2
@@ -173,7 +173,6 @@ export default function QuantifiedParallax() {
             WebkitTextFillColor: "transparent",
             backgroundClip: "text",
             whiteSpace: "nowrap",
-            filter: "drop-shadow(0 18px 40px rgba(21,101,72,0.25))",
           }}
         >
           Optimized
@@ -206,16 +205,16 @@ function ParallaxStatCard({
 
   return (
     <motion.div
-      style={{ ...stat.pos, y, opacity, position: "absolute" }}
+      style={{ ...stat.pos, y, opacity, position: "absolute", willChange: "transform" }}
       className="z-10"
     >
       <div
-        className="relative rounded-2xl px-7 py-6 backdrop-blur-xl"
+        className="relative rounded-2xl px-7 py-6"
         style={{
           maxWidth: stat.big ? "440px" : "300px",
           background:
-            "linear-gradient(135deg, rgba(255,255,255,0.92) 0%, rgba(246,250,248,0.85) 100%)",
-          border: "1px solid rgba(255,255,255,0.9)",
+            "linear-gradient(135deg, #ffffff 0%, #f6faf8 100%)",
+          border: "1px solid rgba(230,232,231,0.9)",
           boxShadow: [
             "0 24px 60px -16px rgba(21,101,72,0.22)",
             "0 8px 24px -8px rgba(21,101,72,0.12)",
