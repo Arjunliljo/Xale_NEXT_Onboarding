@@ -193,14 +193,14 @@ export default function Hero() {
               app.xale.in / pipeline
             </span>
           </div>
-          <div className="grid grid-cols-4 max-md:grid-cols-2 max-sm:grid-cols-1 gap-3 p-4">
+          <div className="grid grid-cols-4 max-md:grid-cols-2 gap-3 max-md:gap-2 p-4 max-sm:p-3">
             {[
               { stage: "New", count: 14, color: "#98cdb8" },
               { stage: "Qualified", count: 8, color: "#6fb99c" },
               { stage: "In Progress", count: 5, color: "#319b72" },
               { stage: "Won", count: 3, color: "#156548" },
             ].map((col, i) => (
-              <div key={col.stage} className="space-y-2">
+              <div key={col.stage} className="space-y-2 max-sm:space-y-1.5">
                 <div
                   className="flex items-center justify-between text-xs px-2 py-1.5"
                   style={{ color: "rgba(255,255,255,0.7)" }}
@@ -223,7 +223,7 @@ export default function Hero() {
                       duration: 0.5,
                       delay: 0.6 + i * 0.1 + j * 0.05,
                     }}
-                    className="rounded-lg p-3 text-left"
+                    className={`rounded-lg p-3 max-sm:p-2 text-left ${j > 0 ? "max-sm:hidden" : ""}`}
                     style={{
                       backgroundColor: "rgba(255,255,255,0.04)",
                       border: "1px solid rgba(255,255,255,0.06)",

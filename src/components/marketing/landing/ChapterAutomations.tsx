@@ -82,10 +82,10 @@ const TONE_LABEL: Record<Step["tone"], string> = {
 
 export default function ChapterAutomations() {
   return (
-    <section className="py-32 max-md:py-20 max-sm:py-16" style={{ backgroundColor: "#ffffff" }}>
+    <section className="py-32 max-md:py-12 max-sm:py-8" style={{ backgroundColor: "#ffffff" }}>
       <div className="max-w-[1200px] mx-auto px-6 max-sm:px-4">
         {/* Header */}
-        <div className="text-center mb-16 max-md:mb-10">
+        <div className="text-center mb-16 max-md:mb-6">
           <Reveal>
             <p
               className="text-sm uppercase tracking-[0.2em] mb-6"
@@ -276,7 +276,7 @@ function WorkflowCard({
         delay: 0.1 + index * 0.08,
         ease: [0.22, 1, 0.36, 1],
       }}
-      className="rounded-2xl p-5 flex flex-col"
+      className="rounded-2xl p-5 max-sm:p-4 flex flex-col"
       style={{
         backgroundColor: "#ffffff",
         border: "1px solid rgba(230,232,231,0.9)",

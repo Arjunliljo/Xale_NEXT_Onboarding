@@ -77,7 +77,7 @@ export default function Problem() {
     <section
       ref={sectionRef}
       data-nav-theme="dark"
-      className="relative py-32 max-md:py-20 max-sm:py-16 overflow-hidden max-md:[min-height:auto]"
+      className="relative py-32 max-md:py-20 max-sm:py-12 overflow-hidden max-md:[min-height:auto]"
       style={{
         backgroundColor: "#020c08",
         backgroundImage:
@@ -138,7 +138,7 @@ export default function Problem() {
                 delay: i * 0.08,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="relative rounded-2xl p-6"
+              className="relative rounded-2xl p-6 max-sm:p-4"
               style={{
                 background: "rgba(255,255,255,0.03)",
                 border: "1px solid rgba(255,255,255,0.08)",

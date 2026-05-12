@@ -4,7 +4,7 @@ import CountUp from "../motion/CountUp";
 export default function Numbers() {
   return (
     <section
-      className="py-32 max-md:py-20 max-sm:py-16"
+      className="py-32 max-md:py-12 max-sm:py-8"
       style={{
         background:
           "radial-gradient(120% 80% at 50% 100%, #eef3f1 0%, #ffffff 60%)",

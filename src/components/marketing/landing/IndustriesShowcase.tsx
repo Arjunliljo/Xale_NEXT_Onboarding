@@ -47,7 +47,7 @@ export default function IndustriesShowcase() {
   return (
     <section
       data-nav-theme="dark"
-      className="py-32 max-md:py-20 max-sm:py-16"
+      className="py-32 max-md:py-12 max-sm:py-8"
       style={{
         backgroundColor: "#020c08",
         backgroundImage:
@@ -56,7 +56,7 @@ export default function IndustriesShowcase() {
       }}
     >
       <div className="max-w-[1200px] mx-auto px-6 max-sm:px-4">
-        <div className="text-center mb-16 max-md:mb-10">
+        <div className="text-center mb-16 max-md:mb-6">
           <Reveal>
             <p
               className="text-sm uppercase tracking-[0.2em] mb-6"
@@ -84,7 +84,7 @@ export default function IndustriesShowcase() {
           </Reveal>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5 max-sm:gap-3">
           {INDUSTRIES.map((ind, i) => (
             <motion.div
               key={ind.slug}
@@ -100,19 +100,19 @@ export default function IndustriesShowcase() {
             >
               <Link
                 href={`/industries/${ind.slug}`}
-                className="block rounded-2xl p-7 h-full transition-colors"
+                className="block rounded-2xl p-7 max-sm:p-3 h-full transition-colors"
                 style={{
                   background: "rgba(255,255,255,0.03)",
                   border: "1px solid rgba(255,255,255,0.08)",
                 }}
               >
                 <div
-                  className="w-16 h-16 rounded-2xl mb-5"
+                  className="w-16 h-16 max-sm:w-10 max-sm:h-10 rounded-2xl mb-5 max-sm:mb-2"
                   style={{ background: ind.gradient }}
                 />
-                <h3 className="text-xl font-medium mb-2">{ind.name}</h3>
+                <h3 className="text-xl max-sm:text-[15px] font-medium mb-2 max-sm:mb-1">{ind.name}</h3>
                 <p
-                  className="text-sm leading-relaxed mb-5"
+                  className="text-sm max-sm:text-[12px] leading-relaxed mb-5 max-sm:mb-2"
                   style={{ color: "rgba(255,255,255,0.6)" }}
                 >
                   {ind.tagline}

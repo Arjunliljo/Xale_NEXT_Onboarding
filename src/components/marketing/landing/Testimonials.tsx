@@ -31,7 +31,7 @@ export default function Testimonials() {
   return (
     <section
       data-nav-theme="dark"
-      className="py-32 max-md:py-20 max-sm:py-16"
+      className="py-32 max-md:py-12 max-sm:py-8"
       style={{
         backgroundColor: "#020c08",
         backgroundImage:
@@ -40,7 +40,7 @@ export default function Testimonials() {
       }}
     >
       <div className="max-w-[1100px] mx-auto px-6 max-sm:px-4">
-        <div className="text-center mb-16 max-md:mb-10">
+        <div className="text-center mb-16 max-md:mb-6">
           <Reveal>
             <p
               className="text-sm uppercase tracking-[0.2em] mb-6"
@@ -58,14 +58,14 @@ export default function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.6, delay: i * 0.08 }}
-              className="rounded-2xl p-7"
+              className="rounded-2xl p-7 max-sm:p-5"
               style={{
                 background: "rgba(255,255,255,0.04)",
                 border: "1px solid rgba(255,255,255,0.08)",
               }}
             >
               <blockquote
-                className="text-lg leading-relaxed mb-6"
+                className="text-lg max-sm:text-base leading-relaxed mb-6 max-sm:mb-4"
                 style={{ color: "rgba(255,255,255,0.85)" }}
               >
                 "{q.quote}"

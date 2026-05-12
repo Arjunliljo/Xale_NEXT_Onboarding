@@ -16,7 +16,7 @@ export default async function CaseStudiesPage() {
   return (
     <>
       <section
-        className="py-32 max-md:py-20 max-sm:py-16"
+        className="py-32 max-md:py-20 max-sm:py-12"
         style={{
           background:
             "radial-gradient(120% 100% at 50% 0%, #1a4a37 0%, #051912 60%)",

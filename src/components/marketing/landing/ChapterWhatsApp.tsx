@@ -17,7 +17,7 @@ const MESSAGES = [
 export default function ChapterWhatsApp() {
   return (
     <section
-      className="py-32 max-md:py-20 max-sm:py-16"
+      className="py-32 max-md:py-12 max-sm:py-8"
       style={{ backgroundColor: "#ffffff" }}
     >
       <div className="max-w-[1200px] mx-auto px-6 max-sm:px-4">

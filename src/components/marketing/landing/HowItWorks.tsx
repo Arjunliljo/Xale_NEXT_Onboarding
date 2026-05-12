@@ -25,7 +25,7 @@ export default function HowItWorks() {
   return (
     <section
       data-nav-theme="dark"
-      className="py-32 max-md:py-20 max-sm:py-16"
+      className="py-32 max-md:py-12 max-sm:py-8"
       style={{
         backgroundColor: "#020c08",
         backgroundImage:
@@ -34,7 +34,7 @@ export default function HowItWorks() {
       }}
     >
       <div className="max-w-[1200px] mx-auto px-6 max-sm:px-4">
-        <div className="text-center mb-20 max-md:mb-12">
+        <div className="text-center mb-20 max-md:mb-6">
           <Reveal>
             <p
               className="text-sm uppercase tracking-[0.2em] mb-6"
@@ -82,7 +82,7 @@ export default function HowItWorks() {
               className="relative text-center"
             >
               <div
-                className="relative z-10 w-24 h-24 mx-auto rounded-full flex items-center justify-center text-2xl font-medium mb-6"
+                className="relative z-10 w-24 h-24 max-sm:w-16 max-sm:h-16 mx-auto rounded-full flex items-center justify-center text-2xl max-sm:text-lg font-medium mb-6 max-sm:mb-4"
                 style={{
                   background:
                     "linear-gradient(135deg, #319b72 0%, #156548 100%)",
@@ -94,13 +94,13 @@ export default function HowItWorks() {
                 {step.n}
               </div>
               <h3
-                className="text-2xl font-medium mb-3"
+                className="text-2xl max-sm:text-xl font-medium mb-3 max-sm:mb-2"
                 style={{ letterSpacing: "-0.01em" }}
               >
                 {step.title}
               </h3>
               <p
-                className="text-base leading-relaxed mx-auto max-w-[280px]"
+                className="text-base max-sm:text-sm leading-relaxed mx-auto max-w-[280px]"
                 style={{ color: "rgba(255,255,255,0.65)" }}
               >
                 {step.description}

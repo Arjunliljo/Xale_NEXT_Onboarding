@@ -8,7 +8,7 @@ export default function ChapterReports() {
   return (
     <section
       data-nav-theme="dark"
-      className="py-32 max-md:py-20 max-sm:py-16"
+      className="py-32 max-md:py-12 max-sm:py-8"
       style={{
         backgroundColor: "#020c08",
         backgroundImage:
@@ -96,7 +96,7 @@ export default function ChapterReports() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.6, delay: 0.2 + i * 0.1 }}
-                className="rounded-2xl p-6"
+                className="rounded-2xl p-6 max-sm:p-4"
                 style={{
                   backgroundColor: "rgba(255,255,255,0.04)",
                   border: "1px solid rgba(255,255,255,0.08)",

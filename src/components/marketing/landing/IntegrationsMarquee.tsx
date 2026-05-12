@@ -21,7 +21,7 @@ export default function IntegrationsMarquee() {
 
   return (
     <section
-      className="py-24 max-md:py-16 overflow-hidden"
+      className="py-24 max-md:py-10 overflow-hidden"
       style={{ backgroundColor: "#ffffff" }}
     >
       <div className="text-center mb-12 max-md:mb-8 max-sm:px-4">

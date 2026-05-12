@@ -118,6 +118,7 @@
 html,
 body {
   background-color: #ffffff;
+  overflow-x: clip;
 }
 
 .text-h1-narrow {

@@ -11,7 +11,7 @@ export default function IndustryTemplate({ industry }: { industry: Industry }) {
     <>
       {/* Hero */}
       <section
-        className="relative py-32 max-md:py-20 max-sm:py-16 overflow-hidden"
+        className="relative py-32 max-md:py-20 max-sm:py-12 overflow-hidden"
         style={{
           background:
             "radial-gradient(120% 100% at 50% 0%, #1a4a37 0%, #051912 60%, #020c08 100%)",

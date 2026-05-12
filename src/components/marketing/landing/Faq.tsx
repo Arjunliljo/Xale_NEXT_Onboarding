@@ -45,10 +45,10 @@ export default function Faq() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section className="py-32 max-md:py-20 max-sm:py-16" style={{ backgroundColor: "#ffffff" }}>
+    <section className="py-32 max-md:py-12 max-sm:py-8" style={{ backgroundColor: "#ffffff" }}>
       <JsonLd data={faqPageSchema(FAQS.map((f) => ({ question: f.q, answer: f.a })))} />
       <div className="max-w-[800px] mx-auto px-6 max-sm:px-4">
-        <div className="text-center mb-16 max-md:mb-10">
+        <div className="text-center mb-16 max-md:mb-6">
           <Reveal>
             <p
               className="text-sm uppercase tracking-[0.2em] mb-6"

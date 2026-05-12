@@ -7,7 +7,7 @@ export default function ChapterMeta() {
   return (
     <section
       data-nav-theme="dark"
-      className="py-32 max-md:py-20 max-sm:py-16"
+      className="py-32 max-md:py-12 max-sm:py-8"
       style={{
         backgroundColor: "#020c08",
         backgroundImage:

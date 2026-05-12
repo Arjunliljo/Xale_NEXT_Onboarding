@@ -8,7 +8,7 @@ export default function FinalCta() {
   return (
     <section
       data-nav-theme="dark"
-      className="relative py-32 max-md:py-20 max-sm:py-16 overflow-hidden"
+      className="relative py-32 max-md:py-12 max-sm:py-8 overflow-hidden"
       style={{
         backgroundColor: "#020c08",
         backgroundImage:

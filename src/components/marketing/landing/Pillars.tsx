@@ -89,7 +89,7 @@ export default function Pillars() {
   });
 
   return (
-    <section ref={sectionRef} className="relative py-32 max-md:py-20 max-sm:py-16 bg-white">
+    <section ref={sectionRef} className="relative py-32 max-md:py-12 max-sm:py-8 bg-white">
       <div
         className="relative w-full overflow-hidden max-md:[height:260px] max-sm:[height:200px]"
         style={{
@@ -106,7 +106,7 @@ export default function Pillars() {
       </div>
 
       <div className="max-w-[1200px] mx-auto px-6 max-sm:px-4">
-        <div className="text-center mb-20 max-md:mb-12">
+        <div className="text-center mb-20 max-md:mb-6">
           <Reveal>
             <p
               className="text-sm uppercase tracking-[0.2em] mb-6"
@@ -146,7 +146,7 @@ export default function Pillars() {
           </Reveal>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5 max-sm:gap-3">
           {PILLARS.map((p, i) => (
             <PillarCard key={p.kind} pillar={p} index={i} />
           ))}
@@ -187,11 +187,11 @@ function PillarCard({ pillar, index }: { pillar: Pillar; index: number }) {
         transition:
           "box-shadow 0.35s ease, border-color 0.35s ease, transform 0.35s cubic-bezier(0.22,1,0.36,1)",
       }}
-      className="relative rounded-2xl p-7 cursor-default flex flex-col overflow-hidden"
+      className="relative rounded-2xl p-7 max-sm:p-5 cursor-default flex flex-col overflow-hidden"
     >
       {/* Visual zone */}
       <div
-        className="relative h-[160px] -mx-7 -mt-7 mb-6 overflow-hidden"
+        className="relative h-[160px] max-sm:h-[120px] -mx-7 max-sm:-mx-5 -mt-7 max-sm:-mt-5 mb-6 max-sm:mb-4 overflow-hidden"
         style={{
           backgroundColor: "#fafbfb",
           borderBottom: "1px solid rgba(230,232,231,0.7)",
@@ -204,7 +204,7 @@ function PillarCard({ pillar, index }: { pillar: Pillar; index: number }) {
       </div>
 
       <h3
-        className="text-[22px] font-medium mb-2.5"
+        className="text-[22px] max-sm:text-[18px] font-medium mb-2.5 max-sm:mb-2"
         style={{
           color: "var(--color-text-primary,#1e302a)",
           letterSpacing: "-0.02em",
@@ -214,7 +214,7 @@ function PillarCard({ pillar, index }: { pillar: Pillar; index: number }) {
         {pillar.title}
       </h3>
       <p
-        className="text-[14.5px] leading-[1.65]"
+        className="text-[14.5px] max-sm:text-[13px] leading-[1.65]"
         style={{ color: "var(--color-text-gray,#6f6f6f)" }}
       >
         {pillar.description}

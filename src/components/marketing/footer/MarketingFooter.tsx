@@ -162,7 +162,7 @@ export default function MarketingFooter() {
         className="absolute inset-x-0 bottom-0 flex justify-center pointer-events-none select-none"
       >
         <h2
-          className="font-medium"
+          className="font-medium max-md:!text-[120px] max-sm:!text-[88px]"
           style={{
             fontSize: "clamp(180px, 24vw, 380px)",
             lineHeight: 0.85,
@@ -181,8 +181,8 @@ export default function MarketingFooter() {
       </motion.div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-[1200px] mx-auto px-6 pt-24 pb-12">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-10">
+      <div className="relative z-10 max-w-[1200px] mx-auto px-6 max-sm:px-4 pt-24 max-md:pt-14 pb-12 max-md:pb-8">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-10 max-md:gap-6 max-sm:gap-5">
           <motion.div
             style={{ y: logoY }}
             className="col-span-2 md:col-span-1"
@@ -232,11 +232,11 @@ export default function MarketingFooter() {
         </div>
 
         {/* Spacer that lets the giant XALE wordmark breathe behind everything */}
-        <div style={{ height: "clamp(120px, 18vw, 280px)" }} aria-hidden />
+        <div className="max-md:!h-10" style={{ height: "clamp(120px, 18vw, 280px)" }} aria-hidden />
 
         <motion.div
           style={{ y: bottomY }}
-          className="pt-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-t"
+          className="pt-8 max-md:pt-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 max-md:gap-3 border-t"
         >
           <p className="text-xs" style={{ color: "rgba(255,255,255,0.45)" }}>
             &copy; {new Date().getFullYear()} Xale. All rights reserved. Powered by{" "}
@@ -309,13 +309,13 @@ function FooterColumn({
 
   return (
     <motion.div style={{ y }}>
-      <h3 className="text-white text-sm font-medium mb-5">{col.title}</h3>
-      <ul className="space-y-3">
+      <h3 className="text-white text-sm font-medium mb-5 max-md:mb-3">{col.title}</h3>
+      <ul className="space-y-3 max-md:space-y-2">
         {col.links.map((l) => (
           <li key={l.href}>
             <Link
               href={l.href}
-              className="text-sm transition-colors hover:text-white"
+              className="text-sm max-md:text-[13px] transition-colors hover:text-white"
               style={{ color: "rgba(255,255,255,0.55)" }}
             >
               {l.label}
