@@ -151,7 +151,7 @@ export default function MarketingFooter() {
           />
         ))}
 
-      {/* Massive parallax background wordmark */}
+      {/* Massive parallax background wordmark — desktop only, hidden on mobile */}
       <motion.div
         aria-hidden
         style={{
@@ -159,7 +159,7 @@ export default function MarketingFooter() {
           scale: wordScale,
           opacity: wordOpacity,
         }}
-        className="absolute inset-x-0 bottom-0 flex justify-center pointer-events-none select-none"
+        className="hidden md:flex absolute inset-x-0 bottom-0 justify-center pointer-events-none select-none"
       >
         <h2
           className="font-medium max-md:!text-[120px] max-sm:!text-[88px]"
@@ -181,25 +181,25 @@ export default function MarketingFooter() {
       </motion.div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-[1200px] mx-auto px-6 max-sm:px-4 pt-24 max-md:pt-14 pb-12 max-md:pb-8">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-10 max-md:gap-6 max-sm:gap-5">
+      <div className="relative z-10 max-w-[1200px] mx-auto px-6 max-sm:px-4 pt-24 max-md:pt-10 max-sm:pt-8 pb-12 max-md:pb-6">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-10 max-md:gap-5 max-sm:gap-4">
           <motion.div
             style={{ y: logoY }}
             className="col-span-2 md:col-span-1"
           >
-            <Link href="/" className="flex items-center gap-2.5 mb-4">
-              <img src="/assets/Logo.png" alt="Xale" className="h-8 w-8 rounded-full" />
-              <span className="text-white text-xl font-medium tracking-tight">
+            <Link href="/" className="flex items-center gap-2.5 mb-4 max-sm:mb-2">
+              <img src="/assets/Logo.png" alt="Xale" className="h-8 w-8 max-sm:h-7 max-sm:w-7 rounded-full" />
+              <span className="text-white text-xl max-sm:text-lg font-medium tracking-tight">
                 Xale
               </span>
             </Link>
             <p
-              className="text-sm leading-relaxed max-w-[240px]"
+              className="text-sm max-sm:text-[12px] leading-relaxed max-w-[240px]"
               style={{ color: "rgba(255,255,255,0.55)" }}
             >
               The CRM operating system for teams that move fast.
             </p>
-            <div className="mt-6 flex items-center gap-2">
+            <div className="mt-6 max-sm:mt-3 flex items-center gap-2">
               <span
                 className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px]"
                 style={{
@@ -231,8 +231,8 @@ export default function MarketingFooter() {
           ))}
         </div>
 
-        {/* Spacer that lets the giant XALE wordmark breathe behind everything */}
-        <div className="max-md:!h-10" style={{ height: "clamp(120px, 18vw, 280px)" }} aria-hidden />
+        {/* Spacer that lets the giant XALE wordmark breathe behind everything — desktop only */}
+        <div className="max-md:hidden" style={{ height: "clamp(120px, 18vw, 280px)" }} aria-hidden />
 
         <motion.div
           style={{ y: bottomY }}
