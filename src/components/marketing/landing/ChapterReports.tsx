@@ -17,7 +17,7 @@ export default function ChapterReports() {
       }}
     >
       <div className="max-w-[1200px] mx-auto px-6 max-sm:px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 max-md:gap-10 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 max-md:gap-6 items-center">
           <div>
             <Reveal>
               <p
@@ -29,7 +29,7 @@ export default function ChapterReports() {
             </Reveal>
             <Reveal delay={0.05}>
               <h2
-                className="text-4xl max-sm:text-3xl md:text-5xl font-medium leading-[1.05] mb-6"
+                className="text-4xl max-sm:text-2xl md:text-5xl font-medium leading-[1.05] mb-6"
                 style={{ letterSpacing: "-0.03em" }}
               >
                 Numbers that actually mean something.
@@ -37,7 +37,7 @@ export default function ChapterReports() {
             </Reveal>
             <Reveal delay={0.1}>
               <p
-                className="text-lg leading-relaxed mb-8"
+                className="text-lg max-sm:text-sm leading-relaxed mb-8"
                 style={{ color: "rgba(255,255,255,0.65)" }}
               >
                 Real-time. Per branch. Per source. Per anyone you want.
@@ -69,7 +69,7 @@ export default function ChapterReports() {
           </div>
 
           {/* Chart cards */}
-          <div className="grid grid-cols-1 gap-4">
+          <div className="grid grid-cols-1 max-sm:grid-cols-2 gap-4 max-sm:gap-3">
             {[
               {
                 title: "Pipeline value",

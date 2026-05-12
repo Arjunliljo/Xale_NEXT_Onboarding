@@ -58,24 +58,24 @@ export default function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.6, delay: i * 0.08 }}
-              className="rounded-2xl p-7 max-sm:p-5"
+              className="rounded-2xl p-7 max-sm:p-4"
               style={{
                 background: "rgba(255,255,255,0.04)",
                 border: "1px solid rgba(255,255,255,0.08)",
               }}
             >
               <blockquote
-                className="text-lg max-sm:text-base leading-relaxed mb-6 max-sm:mb-4"
+                className="text-lg max-sm:text-[13px] leading-relaxed mb-6 max-sm:mb-3"
                 style={{ color: "rgba(255,255,255,0.85)" }}
               >
                 "{q.quote}"
               </blockquote>
               <figcaption
-                className="flex items-center gap-3 pt-5"
+                className="flex items-center gap-3 pt-5 max-sm:pt-3"
                 style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
               >
                 <div
-                  className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium"
+                  className="w-10 h-10 max-sm:w-8 max-sm:h-8 rounded-full flex items-center justify-center text-sm max-sm:text-xs font-medium"
                   style={{
                     background:
                       "linear-gradient(135deg, #98cdb8, #319b72)",

@@ -28,7 +28,7 @@ export default function Numbers() {
             <Reveal key={i} delay={i * 0.1}>
               <div className="text-center">
                 <div
-                  className="text-7xl max-sm:text-6xl md:text-8xl font-thin mb-3"
+                  className="text-7xl max-sm:text-5xl md:text-8xl font-thin mb-3"
                   style={{
                     color: "var(--color-text-primary,#1e302a)",
                     letterSpacing: "-0.04em",

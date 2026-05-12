@@ -45,7 +45,7 @@ export default function FinalCta() {
       <div className="relative max-w-[1100px] mx-auto px-6 max-sm:px-4 text-center">
         <Reveal>
           <h2
-            className="text-5xl max-sm:text-4xl md:text-7xl font-medium leading-[1.05] mb-6"
+            className="text-5xl max-sm:text-3xl md:text-7xl font-medium leading-[1.05] mb-6"
             style={{ letterSpacing: "-0.035em" }}
           >
             Ready to grow your pipeline?
@@ -53,7 +53,7 @@ export default function FinalCta() {
         </Reveal>
         <Reveal delay={0.1}>
           <p
-            className="text-lg md:text-xl mx-auto max-w-xl mb-10"
+            className="text-lg max-sm:text-sm md:text-xl mx-auto max-w-xl mb-10"
             style={{ color: "rgba(255,255,255,0.7)" }}
           >
             Free to start. Scales with you. No credit card needed.

@@ -101,11 +101,11 @@ export default function QuantifiedParallax() {
               The impact, quantified
             </span>
           </div>
-          <div className="flex flex-col gap-4">
+          <div className="grid grid-cols-2 gap-3">
             {STATS.map((stat, i) => (
               <div
                 key={i}
-                className="relative rounded-2xl px-6 py-5"
+                className="relative rounded-2xl px-4 py-4"
                 style={{
                   background:
                     "linear-gradient(135deg, #ffffff 0%, #f6faf8 100%)",
@@ -115,7 +115,7 @@ export default function QuantifiedParallax() {
                 }}
               >
                 <div
-                  className="text-4xl font-semibold mb-2"
+                  className="text-2xl font-semibold mb-1.5"
                   style={{
                     letterSpacing: "-0.035em",
                     background:
@@ -128,7 +128,7 @@ export default function QuantifiedParallax() {
                   {stat.value}
                 </div>
                 <p
-                  className="text-sm leading-relaxed"
+                  className="text-[11px] leading-snug"
                   style={{ color: "var(--color-text-gray,#6f6f6f)" }}
                 >
                   {stat.label}

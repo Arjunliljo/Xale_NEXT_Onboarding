@@ -95,7 +95,7 @@ export default function PipelineStory() {
     return (
       <section
         data-nav-theme="dark"
-        className="relative overflow-hidden py-16"
+        className="relative overflow-hidden py-10"
         style={{
           backgroundColor: "#020c08",
           backgroundImage:
@@ -103,10 +103,10 @@ export default function PipelineStory() {
           color: "#fff",
         }}
       >
-        <div className="relative z-10 max-w-[1200px] mx-auto px-4 flex flex-col gap-10">
-          <div className="flex justify-center">
+        <div className="relative z-10 max-w-[1200px] mx-auto px-4">
+          <div className="flex justify-center mb-6">
             <span
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs text-center"
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] text-center"
               style={{
                 border: "1px solid rgba(152, 205, 184, 0.25)",
                 backgroundColor: "rgba(49,155,114,0.08)",
@@ -124,28 +124,30 @@ export default function PipelineStory() {
               One lead. Four phases.
             </span>
           </div>
+          <div className="grid grid-cols-2 gap-3">
           {PHASES.map((p, i) => (
-            <div key={i} className="rounded-2xl p-6" style={{ border: "1px solid rgba(255,255,255,0.08)", backgroundColor: "rgba(255,255,255,0.03)" }}>
+            <div key={i} className="rounded-xl p-3" style={{ border: "1px solid rgba(255,255,255,0.08)", backgroundColor: "rgba(255,255,255,0.03)" }}>
               <p
-                className="text-xs uppercase tracking-[0.2em] mb-3"
+                className="text-[10px] uppercase tracking-[0.18em] mb-1.5"
                 style={{ color: "#98cdb8" }}
               >
                 {p.eyebrow}
               </p>
               <h2
-                className="text-2xl font-medium leading-tight mb-3"
-                style={{ letterSpacing: "-0.025em" }}
+                className="text-base font-medium leading-tight mb-1.5"
+                style={{ letterSpacing: "-0.02em" }}
               >
                 {p.title}
               </h2>
               <p
-                className="text-sm leading-relaxed"
+                className="text-[12px] leading-snug"
                 style={{ color: "rgba(255,255,255,0.7)" }}
               >
                 {p.body}
               </p>
             </div>
           ))}
+          </div>
         </div>
       </section>
     );
@@ -225,7 +227,7 @@ export default function PipelineStory() {
                   {PHASES[phase].title}
                 </h2>
                 <p
-                  className="text-base md:text-lg leading-relaxed"
+                  className="text-base md:text-lg max-sm:text-sm leading-relaxed"
                   style={{ color: "rgba(255,255,255,0.7)" }}
                 >
                   {PHASES[phase].body}

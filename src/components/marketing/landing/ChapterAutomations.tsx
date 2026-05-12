@@ -96,7 +96,7 @@ export default function ChapterAutomations() {
           </Reveal>
           <Reveal delay={0.05}>
             <h2
-              className="text-4xl max-sm:text-3xl md:text-5xl font-medium leading-[1.05] max-w-3xl mx-auto mb-6"
+              className="text-4xl max-sm:text-2xl md:text-5xl font-medium leading-[1.05] max-w-3xl mx-auto mb-6"
               style={{
                 letterSpacing: "-0.03em",
                 color: "var(--color-text-primary,#1e302a)",
@@ -117,7 +117,7 @@ export default function ChapterAutomations() {
           </Reveal>
           <Reveal delay={0.1}>
             <p
-              className="max-w-2xl mx-auto text-lg leading-relaxed"
+              className="max-w-2xl mx-auto text-lg max-sm:text-sm leading-relaxed"
               style={{ color: "var(--color-text-gray,#6f6f6f)" }}
             >
               From &quot;auto-assign on new lead&quot; to &quot;keep this stage

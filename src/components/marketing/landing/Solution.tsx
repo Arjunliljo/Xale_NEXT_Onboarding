@@ -51,7 +51,7 @@ export default function Solution() {
       />
 
       {/* Top header */}
-      <div className="absolute inset-x-0 top-0 z-10 pt-16 md:pt-24 max-sm:pt-12">
+      <div className="absolute inset-x-0 top-0 z-10 pt-16 md:pt-24 max-sm:pt-8">
         <div className="max-w-[1100px] mx-auto px-6 max-sm:px-4 text-center">
           <Reveal>
             <p
@@ -63,7 +63,7 @@ export default function Solution() {
           </Reveal>
           <Reveal delay={0.05}>
             <h2
-              className="text-4xl max-sm:text-3xl md:text-6xl font-medium leading-[1.05] mb-4"
+              className="text-4xl max-sm:text-2xl md:text-6xl font-medium leading-[1.05] mb-4 max-sm:mb-2"
               style={{ letterSpacing: "-0.03em", color: "#ffffff" }}
             >
               Every channel.
@@ -84,9 +84,9 @@ export default function Solution() {
       </div>
 
       {/* Channel labels at bottom */}
-      <div className="absolute inset-x-0 bottom-8 z-10">
-        <div className="max-w-[1100px] mx-auto px-6">
-          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10">
+      <div className="absolute inset-x-0 bottom-8 max-sm:bottom-4 z-10">
+        <div className="max-w-[1100px] mx-auto px-6 max-sm:px-3">
+          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 max-sm:gap-3">
             {[
               { label: "Meta", color: "#1877F2" },
               { label: "WhatsApp", color: "#25D366" },

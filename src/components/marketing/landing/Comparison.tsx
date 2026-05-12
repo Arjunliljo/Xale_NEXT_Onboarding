@@ -54,7 +54,7 @@ export default function Comparison() {
           </Reveal>
           <Reveal delay={0.05}>
             <h2
-              className="text-4xl max-sm:text-3xl md:text-5xl font-medium leading-[1.05] mb-6 max-w-3xl mx-auto"
+              className="text-4xl max-sm:text-2xl md:text-5xl font-medium leading-[1.05] mb-6 max-w-3xl mx-auto"
               style={{
                 letterSpacing: "-0.03em",
                 color: "var(--color-text-primary,#1e302a)",

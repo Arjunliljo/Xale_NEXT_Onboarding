@@ -67,7 +67,7 @@ export default function IndustriesShowcase() {
           </Reveal>
           <Reveal delay={0.05}>
             <h2
-              className="text-4xl max-sm:text-3xl md:text-6xl font-medium leading-[1.05] mb-6 max-w-3xl mx-auto"
+              className="text-4xl max-sm:text-2xl md:text-6xl font-medium leading-[1.05] mb-6 max-w-3xl mx-auto"
               style={{ letterSpacing: "-0.03em" }}
             >
               Built for your industry.
@@ -75,7 +75,7 @@ export default function IndustriesShowcase() {
           </Reveal>
           <Reveal delay={0.1}>
             <p
-              className="max-w-2xl mx-auto text-lg leading-relaxed"
+              className="max-w-2xl mx-auto text-lg max-sm:text-sm leading-relaxed"
               style={{ color: "rgba(255,255,255,0.65)" }}
             >
               Xale adapts to your niche with industry-specific modules, fields,

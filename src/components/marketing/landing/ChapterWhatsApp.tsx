@@ -34,7 +34,7 @@ export default function ChapterWhatsApp() {
             </Reveal>
             <Reveal delay={0.05}>
               <h2
-                className="text-4xl max-sm:text-3xl md:text-5xl font-medium leading-[1.05] mb-6"
+                className="text-4xl max-sm:text-2xl md:text-5xl font-medium leading-[1.05] mb-6 max-sm:mb-3"
                 style={{
                   letterSpacing: "-0.03em",
                   color: "var(--color-text-primary,#1e302a)",
@@ -44,7 +44,7 @@ export default function ChapterWhatsApp() {
               </h2>
             </Reveal>
             <Reveal delay={0.1}>
-              <ul className="space-y-4 mt-8">
+              <ul className="space-y-4 mt-8 max-sm:space-y-2 max-sm:mt-4">
                 {[
                   "Pre-approved templates with variables — sent in seconds, never flagged",
                   "Broadcasts that don't get your number banned, ever",
@@ -52,7 +52,7 @@ export default function ChapterWhatsApp() {
                 ].map((bullet) => (
                   <li
                     key={bullet}
-                    className="flex items-start gap-3 text-lg leading-relaxed"
+                    className="flex items-start gap-3 text-lg max-sm:text-[13px] leading-relaxed"
                     style={{ color: "var(--color-text-secondary,#505e59)" }}
                   >
                     <span
@@ -92,7 +92,7 @@ export default function ChapterWhatsApp() {
                 }}
               >
                 <div
-                  className="rounded-[32px] overflow-hidden max-sm:[height:480px]"
+                  className="rounded-[32px] overflow-hidden max-md:[height:420px] max-sm:[height:360px]"
                   style={{ backgroundColor: "#0a0a0a", height: "560px" }}
                 >
                   {/* Status bar */}

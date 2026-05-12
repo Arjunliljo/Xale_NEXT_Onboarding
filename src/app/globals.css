@@ -315,7 +315,7 @@ body {
 
 @media (max-width: 768px) {
   .story-section {
-    min-height: auto;
+    min-height: 420px;
   }
   .mobile-stack {
     height: auto !important;

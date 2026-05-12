@@ -45,7 +45,7 @@ export default function HowItWorks() {
           </Reveal>
           <Reveal delay={0.05}>
             <h2
-              className="text-4xl max-sm:text-3xl md:text-6xl font-medium leading-[1.05] mb-6 max-w-3xl mx-auto"
+              className="text-4xl max-sm:text-2xl md:text-6xl font-medium leading-[1.05] mb-6 max-w-3xl mx-auto"
               style={{ letterSpacing: "-0.03em" }}
             >
               Up and running in three steps.
@@ -61,7 +61,7 @@ export default function HowItWorks() {
           </Reveal>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-md:gap-10 relative">
+        <div className="grid grid-cols-1 max-sm:grid-cols-2 md:grid-cols-3 gap-6 max-md:gap-5 relative">
           {/* Connecting line */}
           <div
             aria-hidden
@@ -82,7 +82,7 @@ export default function HowItWorks() {
               className="relative text-center"
             >
               <div
-                className="relative z-10 w-24 h-24 max-sm:w-16 max-sm:h-16 mx-auto rounded-full flex items-center justify-center text-2xl max-sm:text-lg font-medium mb-6 max-sm:mb-4"
+                className="relative z-10 w-24 h-24 max-sm:w-12 max-sm:h-12 mx-auto rounded-full flex items-center justify-center text-2xl max-sm:text-sm font-medium mb-6 max-sm:mb-2"
                 style={{
                   background:
                     "linear-gradient(135deg, #319b72 0%, #156548 100%)",
@@ -94,13 +94,13 @@ export default function HowItWorks() {
                 {step.n}
               </div>
               <h3
-                className="text-2xl max-sm:text-xl font-medium mb-3 max-sm:mb-2"
+                className="text-2xl max-sm:text-base font-medium mb-3 max-sm:mb-1"
                 style={{ letterSpacing: "-0.01em" }}
               >
                 {step.title}
               </h3>
               <p
-                className="text-base max-sm:text-sm leading-relaxed mx-auto max-w-[280px]"
+                className="text-base max-sm:text-[12px] leading-relaxed mx-auto max-w-[280px]"
                 style={{ color: "rgba(255,255,255,0.65)" }}
               >
                 {step.description}

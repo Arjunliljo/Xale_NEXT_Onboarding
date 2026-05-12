@@ -91,7 +91,7 @@ export default function Pillars() {
   return (
     <section ref={sectionRef} className="relative py-32 max-md:py-12 max-sm:py-8 bg-white">
       <div
-        className="relative w-full overflow-hidden max-md:[height:260px] max-sm:[height:200px]"
+        className="relative w-full overflow-hidden max-md:[height:220px] max-sm:[height:160px]"
         style={{
           height: "360px",
           backgroundColor: "#020c08",
@@ -117,7 +117,7 @@ export default function Pillars() {
           </Reveal>
           <Reveal delay={0.1}>
             <h2
-              className="text-4xl max-sm:text-3xl md:text-6xl font-medium leading-[1.05] mb-6 max-w-3xl mx-auto"
+              className="text-4xl max-sm:text-2xl md:text-6xl font-medium leading-[1.05] mb-6 max-w-3xl mx-auto"
               style={{
                 letterSpacing: "-0.035em",
                 color: "var(--color-text-primary,#1e302a)",
@@ -137,7 +137,7 @@ export default function Pillars() {
           </Reveal>
           <Reveal delay={0.2}>
             <p
-              className="mx-auto max-w-2xl text-lg leading-relaxed"
+              className="mx-auto max-w-2xl text-lg max-sm:text-sm leading-relaxed"
               style={{ color: "var(--color-text-gray,#6f6f6f)" }}
             >
               A complete toolkit for modern sales teams — built to be flexible,
@@ -187,11 +187,11 @@ function PillarCard({ pillar, index }: { pillar: Pillar; index: number }) {
         transition:
           "box-shadow 0.35s ease, border-color 0.35s ease, transform 0.35s cubic-bezier(0.22,1,0.36,1)",
       }}
-      className="relative rounded-2xl p-7 max-sm:p-5 cursor-default flex flex-col overflow-hidden"
+      className="relative rounded-2xl p-7 max-sm:p-3 cursor-default flex flex-col overflow-hidden"
     >
       {/* Visual zone */}
       <div
-        className="relative h-[160px] max-sm:h-[120px] -mx-7 max-sm:-mx-5 -mt-7 max-sm:-mt-5 mb-6 max-sm:mb-4 overflow-hidden"
+        className="relative h-[160px] max-sm:h-[80px] -mx-7 max-sm:-mx-3 -mt-7 max-sm:-mt-3 mb-6 max-sm:mb-3 overflow-hidden"
         style={{
           backgroundColor: "#fafbfb",
           borderBottom: "1px solid rgba(230,232,231,0.7)",
@@ -204,7 +204,7 @@ function PillarCard({ pillar, index }: { pillar: Pillar; index: number }) {
       </div>
 
       <h3
-        className="text-[22px] max-sm:text-[18px] font-medium mb-2.5 max-sm:mb-2"
+        className="text-[22px] max-sm:text-[15px] font-medium mb-2.5 max-sm:mb-1"
         style={{
           color: "var(--color-text-primary,#1e302a)",
           letterSpacing: "-0.02em",
@@ -214,7 +214,7 @@ function PillarCard({ pillar, index }: { pillar: Pillar; index: number }) {
         {pillar.title}
       </h3>
       <p
-        className="text-[14.5px] max-sm:text-[13px] leading-[1.65]"
+        className="text-[14.5px] max-sm:text-[12px] leading-[1.5]"
         style={{ color: "var(--color-text-gray,#6f6f6f)" }}
       >
         {pillar.description}
