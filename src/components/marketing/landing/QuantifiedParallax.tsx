@@ -67,6 +67,10 @@ export default function QuantifiedParallax() {
     offset: ["start end", "end start"],
   });
 
+  // Hooks must be called unconditionally — compute these before any early return.
+  const bgY = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [200, -200]);
+  const bgScale = useTransform(scrollYProgress, [0, 0.5, 1], reduce ? [1, 1, 1] : [0.92, 1.0, 1.08]);
+
   if (isMobile) {
     return (
       <section
@@ -136,10 +140,6 @@ export default function QuantifiedParallax() {
       </section>
     );
   }
-
-  // Background word parallaxes upward slightly faster than the cards
-  const bgY = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [200, -200]);
-  const bgScale = useTransform(scrollYProgress, [0, 0.5, 1], reduce ? [1, 1, 1] : [0.92, 1.0, 1.08]);
 
   return (
     <section
