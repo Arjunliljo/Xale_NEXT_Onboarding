@@ -4,7 +4,7 @@ interface LightGreenBtnProps {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   className?: string;
   disabled?: boolean;
-  Icon?: React.ElementType;
+  Icon?: React.ComponentType<{ size?: number; color?: string }>;
   style?: React.CSSProperties;
   children: React.ReactNode;
   type?: "button" | "submit" | "reset";

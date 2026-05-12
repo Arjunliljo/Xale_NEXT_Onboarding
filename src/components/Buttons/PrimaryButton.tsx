@@ -5,7 +5,7 @@ interface PrimaryButtonProps {
   onClick?: () => void;
   className?: string;
   disabled?: boolean;
-  Icon?: React.ElementType;
+  Icon?: React.ComponentType<{ size?: number; color?: string }>;
   style?: React.CSSProperties; // Use CSSProperties for better safety
   children: string;
   // 1. Define the specific type HERE in the interface

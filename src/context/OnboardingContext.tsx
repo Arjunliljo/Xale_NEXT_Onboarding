@@ -5,40 +5,36 @@ import {
   type UseFormRegister,
   type FieldErrors,
   type UseFormHandleSubmit,
+  type UseFormWatch,
   useForm,
 } from "react-hook-form";
 import { useIndustries } from "@/src/hooks/useIndustries";
 import type { SelectOption } from "@/src/components/Layout/OnBoardingDropDown";
-
-// ---------------- TYPES ----------------
-
-// ✅ Form Data
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import useVerify from "@/src/hooks/useVerify";
 
-// Zod schema for Onboarding form validation
 export const onboardingSchema = z.object({
   companyName: z.string().min(3, "Company name is required"),
-  category: z.string().min(1, "Select an option"),
+  category: z.union([z.string(), z.number()]).refine(
+    (v) => (typeof v === "string" ? v.length > 0 : !!v),
+    { message: "Select an option" },
+  ),
 });
 
 export type OnboardingFormData = z.infer<typeof onboardingSchema>;
 
-// ✅ Industry structure ONLY
 interface IndustryConfigs {
   options: SelectOption[];
 }
 
-// ✅ Context Contract
 interface OnboardingContextType {
   onBoardingRegister: UseFormRegister<OnboardingFormData>;
   onBoardingErrors: FieldErrors<OnboardingFormData>;
   onBoardingHandleSubmit: UseFormHandleSubmit<OnboardingFormData>;
   industryConfigs: IndustryConfigs;
+  watch: UseFormWatch<OnboardingFormData>;
 }
-
-// ---------------- CONTEXT ----------------
 
 const OnboardingContext = createContext<OnboardingContextType | undefined>(
   undefined
@@ -48,8 +44,6 @@ interface OnboardingProviderProps {
   children: ReactNode;
 }
 
-// ---------------- PROVIDER ----------------
-
 function OnboardingProvider({ children }: OnboardingProviderProps) {
   const { user } = useVerify();
   const industryConfigs = useIndustries();
@@ -57,18 +51,18 @@ function OnboardingProvider({ children }: OnboardingProviderProps) {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
     reset,
   } = useForm<OnboardingFormData>({
     resolver: zodResolver(onboardingSchema),
-    // No defaultValues here, they will be set with useEffect
   });
 
   useEffect(() => {
-    if (user) {
+    if (user?.tenantId) {
       reset({
-        companyName: user?.tenant?.tenantName,
-        category: user?.tenant?.industryId,
+        companyName: user?.tenant?.tenantName ?? "",
+        category: user?.tenant?.industryId ?? "",
       });
     }
   }, [reset, user]);
@@ -78,6 +72,7 @@ function OnboardingProvider({ children }: OnboardingProviderProps) {
     onBoardingErrors: errors,
     onBoardingHandleSubmit: handleSubmit,
     industryConfigs,
+    watch,
   };
 
   return (
@@ -86,8 +81,6 @@ function OnboardingProvider({ children }: OnboardingProviderProps) {
     </OnboardingContext.Provider>
   );
 }
-
-// ---------------- HOOK ----------------
 
 function useOnboarding(): OnboardingContextType {
   const context = useContext(OnboardingContext);

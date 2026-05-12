@@ -14,7 +14,7 @@ export interface SelectOption {
 interface OnBoardingSelectProps
   extends React.SelectHTMLAttributes<HTMLSelectElement> {
   label?: string;
-  Icon: React.ElementType;
+  Icon: React.ComponentType<{ size?: number; color?: string }>;
   options?: SelectOption[];
   error?: FieldError;
   containerClassName?: string;

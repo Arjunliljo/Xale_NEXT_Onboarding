@@ -1,13 +1,23 @@
 "use client";
 
+import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { toast } from "react-toastify";
+
 import { PrimaryButton } from "@/src/components/Buttons/PrimaryButton";
 import { LightGreenBtn } from "@/src/components/Buttons/LightGreenButton";
-import { LeftArrowIcon, RightArrowIcon } from "@/src/lib/utilities/icons";
-import { useRouter } from "next/navigation";
 import LinkSection from "@/src/components/footer/LinkSection";
-import Image from "next/image";
+import { LeftArrowIcon, RightArrowIcon } from "@/src/lib/utilities/icons";
 import { useGetPathNum } from "@/src/hooks/useGetPathNum";
 import { useMediaQuery } from "@/src/hooks/useMediaQuery";
+import {
+  useOnboarding,
+  type OnboardingFormData,
+} from "@/src/context/OnboardingContext";
+import useVerify from "@/src/hooks/useVerify";
+import axiosInstance from "@/src/lib/axios/axiosConfig";
+import { tenantCreate, tenantEditProfile } from "@/src/lib/endpoints";
 
 const footerIllustration1 = "/assets/images/footerIllustration-1.svg";
 const footerIllustration2 = "/assets/images/footerIllustration-2.svg";
@@ -25,26 +35,70 @@ function LayoutOnboardingFooter() {
 
   const isOnBoarded = false;
   const router = useRouter();
-    const { pathNum } = useGetPathNum(ONBOARDING_STEPS);
+  const { pathNum } = useGetPathNum(ONBOARDING_STEPS);
 
-    const isMobileOrTablet = useMediaQuery("(max-width: 1024px)");
+  const isMobileOrTablet = useMediaQuery("(max-width: 1024px)");
 
-    const currentImage =
-      pathNum >= 0 && pathNum < IMAGES.length ? IMAGES[pathNum] : IMAGES[0];
+  const { user, verify } = useVerify();
+  const { onBoardingHandleSubmit } = useOnboarding();
 
-    const handleNext = () => {
-      if (pathNum < ONBOARDING_STEPS.length - 1) {
-        router.push(ONBOARDING_STEPS[pathNum + 1]);
-      } else {
-        router.push("/dashboard");
+  const currentImage =
+    pathNum >= 0 && pathNum < IMAGES.length ? IMAGES[pathNum] : IMAGES[0];
+
+  const { mutate: saveTenantProfile, isPending: isSavingProfile } = useMutation({
+    mutationFn: async (data: OnboardingFormData) => {
+      const body = {
+        tenantName: data.companyName,
+        industryId: Number(data.category),
+      };
+
+      const currentTenant = user?.tenant;
+
+      if (!user?.tenantId) {
+        return axiosInstance.post(tenantCreate, body);
       }
-    };
 
-    const handleBack = () => {
-      if (pathNum > 0) {
-        router.push(ONBOARDING_STEPS[pathNum - 1]);
+      const isChangedName = body.tenantName !== currentTenant?.tenantName;
+      const isChangedIndustry = body.industryId !== currentTenant?.industryId;
+
+      if (isChangedName || isChangedIndustry) {
+        return axiosInstance.patch(tenantEditProfile, body);
       }
-    };
+
+      return Promise.resolve({ data: "No changes detected" });
+    },
+    onSuccess: () => {
+      // Refresh the user so the next step sees the new tenantId.
+      verify();
+      router.push(ONBOARDING_STEPS[1]);
+    },
+    onError: (error: any) => {
+      toast.error(
+        error?.response?.data?.message ||
+          error?.message ||
+          "Something went wrong"
+      );
+    },
+  });
+
+  const handleNext = () => {
+    if (pathNum === 0) {
+      // Submit the onboarding form — creates the tenant if one doesn't exist.
+      onBoardingHandleSubmit((data) => saveTenantProfile(data))();
+      return;
+    }
+    if (pathNum < ONBOARDING_STEPS.length - 1) {
+      router.push(ONBOARDING_STEPS[pathNum + 1]);
+    } else {
+      router.push("/dashboard");
+    }
+  };
+
+  const handleBack = () => {
+    if (pathNum > 0) {
+      router.push(ONBOARDING_STEPS[pathNum - 1]);
+    }
+  };
 
   const isFirstStep = pathNum === 0;
 
@@ -93,14 +147,19 @@ function LayoutOnboardingFooter() {
 
         <div className={`flex ${isMobileOrTablet ? "justify-end" : "justify-end"}`}>
           <PrimaryButton
-            style={{ 
+            style={{
               width: isMobileOrTablet ? "auto" : "15rem",
-              minWidth: isMobileOrTablet ? "7.5rem" : "15rem"
+              minWidth: isMobileOrTablet ? "7.5rem" : "15rem",
             }}
             onClick={handleNext}
+            disabled={isSavingProfile}
             Icon={RightArrowIcon}
           >
-            {pathNum === ONBOARDING_STEPS.length - 1 ? "Finish" : "Continue"}
+            {pathNum === ONBOARDING_STEPS.length - 1
+              ? "Finish"
+              : isSavingProfile
+                ? "Saving…"
+                : "Continue"}
           </PrimaryButton>
         </div>
       </div>

@@ -1,14 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import axiosInstance from "@/src/lib/axios/axiosConfig";
+import { platformIndustry } from "@/src/lib/endpoints";
 import type { SelectOption } from "@/src/components/Layout/OnBoardingDropDown";
 
-// ✅ API Industry Model
-interface Industry {
-  id: string;
+export interface Industry {
+  id: number;
   name: string;
 }
 
-// ✅ Hook Return Type
 interface UseIndustriesResult {
   industries: Industry[];
   options: SelectOption[];
@@ -24,12 +23,11 @@ export function useIndustries(): UseIndustriesResult {
   } = useQuery<Industry[]>({
     queryKey: ["industries"],
     queryFn: async () => {
-      const res = await axiosInstance.get("/industry");
-      return res.data.data.industries as Industry[];
+      const res = await axiosInstance.get(platformIndustry);
+      return (res.data?.industries ?? []) as Industry[];
     },
   });
 
-  // ✅ Safe Mapping
   const options: SelectOption[] = industries.map((obj) => ({
     label: obj.name,
     value: obj.id,
