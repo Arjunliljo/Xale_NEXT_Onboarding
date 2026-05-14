@@ -70,7 +70,17 @@ export default function IndustriesShowcase() {
               className="text-4xl max-sm:text-2xl md:text-6xl font-medium leading-[1.05] mb-6 max-w-3xl mx-auto"
               style={{ letterSpacing: "-0.03em" }}
             >
-              Built for your industry.
+              Built for{" "}
+              <span
+                className="italic font-normal"
+                style={{
+                  fontFamily: "var(--font-instrument-serif), serif",
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                your industry
+              </span>
+              .
             </h2>
           </Reveal>
           <Reveal delay={0.1}>

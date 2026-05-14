@@ -2,12 +2,13 @@
 
 import { motion } from "motion/react";
 import Reveal from "../motion/Reveal";
+import AnimatedWaveDivider from "./AnimatedWaveDivider";
 
 export default function ChapterMeta() {
   return (
     <section
       data-nav-theme="dark"
-      className="py-32 max-md:py-12 max-sm:py-8"
+      className="relative overflow-hidden py-32 max-md:py-12 max-md:pb-20 max-sm:py-8 max-sm:pb-16"
       style={{
         backgroundColor: "#020c08",
         backgroundImage:
@@ -112,7 +113,17 @@ export default function ChapterMeta() {
                 className="text-4xl max-sm:text-2xl md:text-5xl font-medium leading-[1.05] mb-6"
                 style={{ letterSpacing: "-0.03em" }}
               >
-                From Facebook ad to first message — in 60 seconds.
+                From Facebook ad to first message — in{" "}
+                <span
+                  className="italic font-normal"
+                  style={{
+                    fontFamily: "var(--font-instrument-serif), serif",
+                    letterSpacing: "-0.02em",
+                  }}
+                >
+                  60 seconds
+                </span>
+                .
               </h2>
             </Reveal>
             <Reveal delay={0.1}>
@@ -163,6 +174,7 @@ export default function ChapterMeta() {
           </div>
         </div>
       </div>
+      <AnimatedWaveDivider fill="#ffffff" height={120} />
     </section>
   );
 }

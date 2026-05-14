@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import Reveal from "../motion/Reveal";
+import AnimatedWaveDivider from "./AnimatedWaveDivider";
 
 const MESSAGES = [
   { side: "in", text: "Hi! Is the IELTS coaching still available for May?", delay: 0.3 },
@@ -17,7 +18,7 @@ const MESSAGES = [
 export default function ChapterWhatsApp() {
   return (
     <section
-      className="py-32 max-md:py-12 max-sm:py-8"
+      className="relative overflow-hidden py-32 max-md:py-12 max-md:pb-20 max-sm:py-8 max-sm:pb-16"
       style={{ backgroundColor: "#ffffff" }}
     >
       <div className="max-w-[1200px] mx-auto px-6 max-sm:px-4">
@@ -40,7 +41,17 @@ export default function ChapterWhatsApp() {
                   color: "var(--color-text-primary,#1e302a)",
                 }}
               >
-                WhatsApp is your team's biggest sales channel. We made it a CRM.
+                WhatsApp is your team's biggest sales channel. We made it{" "}
+                <span
+                  className="italic font-normal"
+                  style={{
+                    fontFamily: "var(--font-instrument-serif), serif",
+                    letterSpacing: "-0.02em",
+                  }}
+                >
+                  a CRM
+                </span>
+                .
               </h2>
             </Reveal>
             <Reveal delay={0.1}>
@@ -171,6 +182,7 @@ export default function ChapterWhatsApp() {
           </div>
         </div>
       </div>
+      <AnimatedWaveDivider fill="#020c08" height={120} />
     </section>
   );
 }

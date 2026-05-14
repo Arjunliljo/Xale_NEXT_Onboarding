@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import Reveal from "../motion/Reveal";
+import AnimatedWaveDivider from "./AnimatedWaveDivider";
 
 type Step = { label: string; tone: "trigger" | "condition" | "action" };
 
@@ -82,7 +83,7 @@ const TONE_LABEL: Record<Step["tone"], string> = {
 
 export default function ChapterAutomations() {
   return (
-    <section className="py-32 max-md:py-12 max-sm:py-8" style={{ backgroundColor: "#ffffff" }}>
+    <section className="relative overflow-hidden py-32 max-md:py-12 max-md:pb-20 max-sm:py-8 max-sm:pb-16" style={{ backgroundColor: "#ffffff" }}>
       <div className="max-w-[1200px] mx-auto px-6 max-sm:px-4">
         {/* Header */}
         <div className="text-center mb-16 max-md:mb-6">
@@ -236,6 +237,7 @@ export default function ChapterAutomations() {
           </div>
         </Reveal>
       </div>
+      <AnimatedWaveDivider fill="#020c08" height={120} />
     </section>
   );
 }

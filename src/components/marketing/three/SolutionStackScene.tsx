@@ -1,29 +1,10 @@
 "use client";
 
 /**
- * SolutionStackScene — 5 channel dashboard panels that converge into a
- * layered stack as the user scrolls. Tells the "unified platform" story
- * literally: scattered tools → one stack.
- *
- * Panels:
- *  1. Meta Lead Ads (blue)
- *  2. WhatsApp Business (green)
- *  3. Gmail (red)
- *  4. TeleCMI Calls (teal)
- *  5. Xale unified dashboard (front, brand green) — the "destination"
- *
- * Scroll-driven:
- *  - 0.0–0.4: panels scattered (each at unique x/y/z + rotation)
- *  - 0.4–0.85: panels translate + rotate to align facing camera
- *  - 0.85–1.0: panels stacked precisely, slight z-offsets, Xale glows
- *
- * Cursor-driven:
- *  - Whole stack tilts based on cursor x/y (parallax)
- *
- * Perf:
- *  - 5 panel groups (~10 meshes each) ≈ 50 meshes, all flat geometry
- *  - useFrame mutates refs only — no React state changes
- *  - DPR cap 1.5, antialias false, no env / HDRI / post
+ * SolutionStackScene — 5 vertical brand cards that converge into a layered
+ * stack as the user scrolls. Tells the "unified platform" story through
+ * geometry: increasing-side polygons (triangle → square → pentagon →
+ * hexagon → circle) in a unified brand-green palette.
  */
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
@@ -32,7 +13,10 @@ import * as THREE from "three";
 
 type PanelConfig = {
   label: string;
-  accent: string;
+  /** Polygon side count for the center mark. 32 ≈ smooth circle. */
+  sides: number;
+  /** Base tint + accent line color. */
+  tint: string;
   /** Stack order: 0 = back, 4 = front (Xale) */
   stackIndex: number;
   /** Initial scattered position (before scroll) */
@@ -45,257 +29,132 @@ type PanelConfig = {
 const PANELS: PanelConfig[] = [
   {
     label: "Meta",
-    accent: "#1877F2",
+    sides: 3,
+    tint: "#1f5a44",
     stackIndex: 0,
-    scattered: { pos: [-3.4, 0.9, -1.8], rot: [0.15, 0.6, -0.2] },
+    scattered: { pos: [-3.3, 1.15, -1.8], rot: [0.2, 0.6, -0.22] },
   },
   {
     label: "WhatsApp",
-    accent: "#25D366",
+    sides: 4,
+    tint: "#256e52",
     stackIndex: 1,
-    scattered: { pos: [3.3, 1.0, -1.0], rot: [-0.1, -0.55, 0.18] },
+    scattered: { pos: [3.15, 1.15, -1.0], rot: [-0.14, -0.55, 0.2] },
   },
   {
     label: "Gmail",
-    accent: "#EA4335",
+    sides: 5,
+    tint: "#319b72",
     stackIndex: 2,
-    scattered: { pos: [-3.0, -1.2, -0.4], rot: [-0.2, 0.4, 0.15] },
+    scattered: { pos: [-3.05, -1.2, -0.5], rot: [-0.22, 0.45, 0.18] },
   },
   {
     label: "Calls",
-    accent: "#319b72",
+    sides: 6,
+    tint: "#6fb99c",
     stackIndex: 3,
-    scattered: { pos: [3.1, -1.1, -2.2], rot: [0.2, -0.45, -0.2] },
+    scattered: { pos: [2.95, -1.15, -2.0], rot: [0.22, -0.5, -0.22] },
   },
   {
     label: "Xale",
-    accent: "#98cdb8",
+    sides: 32,
+    tint: "#98cdb8",
     stackIndex: 4,
-    scattered: { pos: [0.0, 0.5, -3.5], rot: [-0.3, 0.0, 0.0] },
+    scattered: { pos: [0.0, 0.4, -3.4], rot: [-0.3, 0.0, 0.0] },
   },
 ];
 
-const STACK_Z_OFFSET = 0.18; // gap between stacked layers
+const PANEL_W = 0.95;
+const PANEL_H = 1.45;
+const STACK_Z_OFFSET = 0.14;
 
 // =========================================================================
-// Panel UI Renderers — each draws the channel-specific flat UI on a plane
+// Card content — polygon mark + name strip + accent line
 // =========================================================================
 
-function MetaPanelUI({ accent }: { accent: string }) {
+function CardContent({ tint, sides }: { tint: string; sides: number }) {
+  const isCircle = sides >= 16;
   return (
     <>
-      {/* Header */}
-      <mesh position={[0, 0.66, 0.026]}>
-        <planeGeometry args={[2.3, 0.18]} />
-        <meshBasicMaterial color={accent} />
+      {/* Glass surface inset */}
+      <mesh position={[0, 0, 0.026]}>
+        <planeGeometry args={[PANEL_W - 0.08, PANEL_H - 0.08]} />
+        <meshBasicMaterial color="#0a1d15" transparent opacity={0.5} />
       </mesh>
-      {/* "Get more leads" title bar */}
-      <mesh position={[-0.4, 0.66, 0.027]}>
-        <planeGeometry args={[1.2, 0.06]} />
-        <meshBasicMaterial color="#ffffff" transparent opacity={0.95} />
-      </mesh>
-      {/* 3 form fields */}
-      {[0.32, 0.08, -0.16].map((y, i) => (
-        <group key={i} position={[0, y, 0.026]}>
-          <mesh position={[-0.85, 0, 0]}>
-            <planeGeometry args={[0.35, 0.06]} />
-            <meshBasicMaterial color="#98cdb8" transparent opacity={0.6} />
-          </mesh>
-          <mesh position={[0.32, 0, 0]}>
-            <planeGeometry args={[1.4, 0.16]} />
-            <meshBasicMaterial color="#1a3a2c" transparent opacity={0.7} />
-          </mesh>
-        </group>
-      ))}
-      {/* Submit button */}
-      <mesh position={[0.5, -0.5, 0.026]}>
-        <planeGeometry args={[1.0, 0.18]} />
-        <meshBasicMaterial color={accent} />
-      </mesh>
-    </>
-  );
-}
 
-function WhatsappPanelUI({ accent }: { accent: string }) {
-  return (
-    <>
-      {/* Header */}
-      <mesh position={[0, 0.66, 0.026]}>
-        <planeGeometry args={[2.3, 0.18]} />
-        <meshBasicMaterial color={accent} />
+      {/* Top tinted band — color identity at the top of the card */}
+      <mesh position={[0, PANEL_H / 2 - 0.07, 0.027]}>
+        <planeGeometry args={[PANEL_W - 0.08, 0.05]} />
+        <meshBasicMaterial color={tint} transparent opacity={0.85} />
       </mesh>
-      {/* Avatar circle */}
-      <mesh position={[-0.95, 0.66, 0.027]}>
-        <circleGeometry args={[0.06, 16]} />
-        <meshBasicMaterial color="#ffffff" />
-      </mesh>
-      {/* Name strip */}
-      <mesh position={[-0.6, 0.66, 0.027]}>
-        <planeGeometry args={[0.5, 0.05]} />
-        <meshBasicMaterial color="#ffffff" transparent opacity={0.9} />
-      </mesh>
-      {/* Chat bubbles */}
-      <mesh position={[-0.4, 0.35, 0.026]}>
-        <planeGeometry args={[0.95, 0.15]} />
-        <meshBasicMaterial color="#ffffff" transparent opacity={0.5} />
-      </mesh>
-      <mesh position={[0.45, 0.12, 0.026]}>
-        <planeGeometry args={[0.85, 0.14]} />
-        <meshBasicMaterial color={accent} transparent opacity={0.85} />
-      </mesh>
-      <mesh position={[-0.5, -0.12, 0.026]}>
-        <planeGeometry args={[0.75, 0.13]} />
-        <meshBasicMaterial color="#ffffff" transparent opacity={0.5} />
-      </mesh>
-      {/* Input bar at bottom */}
-      <mesh position={[0, -0.55, 0.026]}>
-        <planeGeometry args={[2.1, 0.14]} />
-        <meshBasicMaterial color="#1a3a2c" transparent opacity={0.8} />
-      </mesh>
-    </>
-  );
-}
 
-function GmailPanelUI({ accent }: { accent: string }) {
-  return (
-    <>
-      {/* Header */}
-      <mesh position={[0, 0.66, 0.026]}>
-        <planeGeometry args={[2.3, 0.18]} />
-        <meshBasicMaterial color={accent} />
+      {/* Polygon outer ring */}
+      <mesh
+        position={[0, 0.32, 0.027]}
+        rotation={[0, 0, sides === 4 ? Math.PI / 4 : 0]}
+      >
+        <ringGeometry args={[0.21, 0.245, sides]} />
+        <meshBasicMaterial color={tint} transparent opacity={0.55} />
       </mesh>
-      <mesh position={[-0.5, 0.66, 0.027]}>
-        <planeGeometry args={[1.0, 0.06]} />
-        <meshBasicMaterial color="#ffffff" transparent opacity={0.95} />
+
+      {/* Polygon filled inner */}
+      <mesh
+        position={[0, 0.32, 0.028]}
+        rotation={[0, 0, sides === 4 ? Math.PI / 4 : 0]}
+      >
+        <circleGeometry args={[0.16, sides]} />
+        <meshBasicMaterial color={tint} />
       </mesh>
-      {/* Email rows */}
-      {[0.35, 0.18, 0.01, -0.16, -0.33].map((y, i) => (
-        <group key={i} position={[0, y, 0.026]}>
-          <mesh position={[-0.95, 0, 0]}>
-            <circleGeometry args={[0.04, 12]} />
-            <meshBasicMaterial color={accent} transparent opacity={0.7} />
-          </mesh>
-          <mesh position={[-0.4, 0, 0]}>
-            <planeGeometry args={[0.7, 0.05]} />
+
+      {/* Inner negative space (small darker polygon for depth) */}
+      <mesh
+        position={[0, 0.32, 0.029]}
+        rotation={[0, 0, sides === 4 ? Math.PI / 4 : 0]}
+      >
+        <circleGeometry args={[0.075, sides]} />
+        <meshBasicMaterial color="#0a1d15" />
+      </mesh>
+
+      {/* Center dot */}
+      <mesh position={[0, 0.32, 0.03]}>
+        <circleGeometry args={[0.025, 18]} />
+        <meshBasicMaterial color={tint} />
+      </mesh>
+
+      {/* Channel name strip (large) */}
+      <mesh position={[0, -0.18, 0.028]}>
+        <planeGeometry args={[0.62, 0.06]} />
+        <meshBasicMaterial color="#ffffff" transparent opacity={0.92} />
+      </mesh>
+
+      {/* Subtitle strip */}
+      <mesh position={[0, -0.28, 0.028]}>
+        <planeGeometry args={[0.4, 0.028]} />
+        <meshBasicMaterial color={tint} transparent opacity={0.65} />
+      </mesh>
+
+      {/* Side count / "shape label" — three tiny dots representing rank */}
+      <group position={[0, -0.43, 0.028]}>
+        {[0, 1, 2, 3, 4].map((i) => (
+          <mesh key={i} position={[-0.12 + i * 0.06, 0, 0]}>
+            <circleGeometry args={[0.015, 12]} />
             <meshBasicMaterial
-              color={i === 0 ? "#ffffff" : "#98cdb8"}
+              color={tint}
               transparent
-              opacity={i === 0 ? 0.9 : 0.6}
+              opacity={i < (isCircle ? 5 : Math.min(sides - 2, 4)) ? 0.9 : 0.18}
             />
-          </mesh>
-          <mesh position={[0.6, 0, 0]}>
-            <planeGeometry args={[0.9, 0.04]} />
-            <meshBasicMaterial color="#6fb99c" transparent opacity={0.5} />
-          </mesh>
-        </group>
-      ))}
-    </>
-  );
-}
-
-function CallsPanelUI({ accent }: { accent: string }) {
-  return (
-    <>
-      {/* Header */}
-      <mesh position={[0, 0.66, 0.026]}>
-        <planeGeometry args={[2.3, 0.18]} />
-        <meshBasicMaterial color="#1a3a2c" />
-      </mesh>
-      <mesh position={[-0.6, 0.66, 0.027]}>
-        <planeGeometry args={[0.9, 0.06]} />
-        <meshBasicMaterial color={accent} transparent opacity={0.95} />
-      </mesh>
-      {/* Call log rows */}
-      {[0.32, 0.08, -0.16, -0.4].map((y, i) => (
-        <group key={i} position={[0, y, 0.026]}>
-          <mesh position={[-0.95, 0, 0]}>
-            <circleGeometry args={[0.05, 12]} />
-            <meshBasicMaterial color={accent} transparent opacity={0.9} />
-          </mesh>
-          <mesh position={[-0.3, 0.025, 0]}>
-            <planeGeometry args={[0.8, 0.04]} />
-            <meshBasicMaterial color="#ffffff" transparent opacity={0.8} />
-          </mesh>
-          <mesh position={[-0.4, -0.04, 0]}>
-            <planeGeometry args={[0.5, 0.03]} />
-            <meshBasicMaterial color="#98cdb8" transparent opacity={0.5} />
-          </mesh>
-          <mesh position={[0.85, 0, 0]}>
-            <planeGeometry args={[0.35, 0.08]} />
-            <meshBasicMaterial color={accent} transparent opacity={0.6} />
-          </mesh>
-        </group>
-      ))}
-    </>
-  );
-}
-
-function XalePanelUI({ accent }: { accent: string }) {
-  return (
-    <>
-      {/* Header w/ gradient feel (use the accent green) */}
-      <mesh position={[0, 0.66, 0.026]}>
-        <planeGeometry args={[2.3, 0.18]} />
-        <meshBasicMaterial color="#0e3225" />
-      </mesh>
-      <mesh position={[-0.95, 0.66, 0.027]}>
-        <circleGeometry args={[0.05, 16]} />
-        <meshBasicMaterial color={accent} />
-      </mesh>
-      <mesh position={[-0.55, 0.66, 0.027]}>
-        <planeGeometry args={[0.55, 0.05]} />
-        <meshBasicMaterial color="#ffffff" transparent opacity={0.95} />
-      </mesh>
-
-      {/* 3-column kanban */}
-      {[-0.7, 0, 0.7].map((x, col) => (
-        <group key={col} position={[x, 0.18, 0.026]}>
-          {/* Column header */}
-          <mesh position={[0, 0.22, 0]}>
-            <planeGeometry args={[0.55, 0.04]} />
-            <meshBasicMaterial
-              color={col === 0 ? "#319b72" : col === 1 ? "#98cdb8" : "#6fb99c"}
-              transparent
-              opacity={0.85}
-            />
-          </mesh>
-          {/* Cards */}
-          {[0.05, -0.1].map((cardY, c) => (
-            <mesh key={c} position={[0, cardY, 0]}>
-              <planeGeometry args={[0.62, 0.14]} />
-              <meshBasicMaterial
-                color="#1a3a2c"
-                transparent
-                opacity={0.85}
-              />
-            </mesh>
-          ))}
-        </group>
-      ))}
-
-      {/* Footer chart bars */}
-      <group position={[0, -0.42, 0.026]}>
-        {[0.35, 0.55, 0.4, 0.7, 0.55, 0.85, 0.65].map((h, i) => (
-          <mesh
-            key={i}
-            position={[-0.7 + i * 0.23, -0.05 + h * 0.05, 0]}
-          >
-            <planeGeometry args={[0.16, h * 0.18]} />
-            <meshBasicMaterial color={accent} />
           </mesh>
         ))}
       </group>
+
+      {/* Bottom accent underline */}
+      <mesh position={[0, -PANEL_H / 2 + 0.06, 0.028]}>
+        <planeGeometry args={[PANEL_W - 0.18, 0.005]} />
+        <meshBasicMaterial color={tint} transparent opacity={0.75} />
+      </mesh>
     </>
   );
 }
-
-const PANEL_UI = {
-  Meta: MetaPanelUI,
-  WhatsApp: WhatsappPanelUI,
-  Gmail: GmailPanelUI,
-  Calls: CallsPanelUI,
-  Xale: XalePanelUI,
-} as const;
 
 // =========================================================================
 // Panel — drives positioning/rotation based on scroll progress
@@ -311,11 +170,12 @@ function Panel({
   const groupRef = useRef<THREE.Group>(null);
   const glowRef = useRef<THREE.Mesh>(null);
   const isXale = config.label === "Xale";
-  const UIComponent = PANEL_UI[config.label as keyof typeof PANEL_UI];
 
-  const accentColor = useMemo(() => new THREE.Color(config.accent), [config.accent]);
+  const tintColor = useMemo(
+    () => new THREE.Color(config.tint),
+    [config.tint]
+  );
 
-  // Final stacked position: each panel offset on Z by stackIndex
   const stackedPos = useMemo<[number, number, number]>(
     () => [0, 0, -config.stackIndex * STACK_Z_OFFSET + 0.5],
     [config.stackIndex]
@@ -326,60 +186,66 @@ function Panel({
     const t = state.clock.elapsedTime;
     const p = progressRef.current ?? 0;
 
-    // Convergence factor — 0 = scattered, 1 = stacked.
-    // Section is 100vh tall now (no sticky), so progress 0→1 spans the
-    // section's full transit through viewport. Assembly should peak by
-    // the time section is centered (~progress 0.5).
-    const align = THREE.MathUtils.smoothstep(p, 0.25, 0.6);
+    // Wide range = slower, more settled convergence as the user scrolls.
+    const align = THREE.MathUtils.smoothstep(p, 0.15, 0.85);
 
-    // Position lerp
-    const px = THREE.MathUtils.lerp(config.scattered.pos[0], stackedPos[0], align);
-    const py = THREE.MathUtils.lerp(config.scattered.pos[1], stackedPos[1], align);
-    const pz = THREE.MathUtils.lerp(config.scattered.pos[2], stackedPos[2], align);
-    // Add gentle idle bob (more pronounced when scattered, subtle when stacked)
-    const bob = Math.sin(t * 0.5 + config.stackIndex) * 0.06 * (1 - align);
+    const px = THREE.MathUtils.lerp(
+      config.scattered.pos[0],
+      stackedPos[0],
+      align
+    );
+    const py = THREE.MathUtils.lerp(
+      config.scattered.pos[1],
+      stackedPos[1],
+      align
+    );
+    const pz = THREE.MathUtils.lerp(
+      config.scattered.pos[2],
+      stackedPos[2],
+      align
+    );
+    const bob =
+      Math.sin(t * 0.5 + config.stackIndex) * 0.06 * (1 - align);
     groupRef.current.position.set(px, py + bob, pz);
 
-    // Rotation lerp (scattered → flat to camera)
     const rx = THREE.MathUtils.lerp(config.scattered.rot[0], 0, align);
     const ry = THREE.MathUtils.lerp(config.scattered.rot[1], 0, align);
     const rz = THREE.MathUtils.lerp(config.scattered.rot[2], 0, align);
-    // Idle wiggle while scattered
-    const idleRot = (1 - align) * Math.sin(t * 0.35 + config.stackIndex * 0.5) * 0.06;
+    const idleRot =
+      (1 - align) * Math.sin(t * 0.35 + config.stackIndex * 0.5) * 0.06;
     groupRef.current.rotation.set(rx, ry + idleRot, rz);
 
-    // Xale glow ramps up as stack assembles + scroll completes
     if (glowRef.current) {
       const glowMat = glowRef.current.material as THREE.MeshBasicMaterial;
       const glowT = isXale
-        ? THREE.MathUtils.smoothstep(p, 0.5, 0.75)
-        : THREE.MathUtils.smoothstep(p, 0.0, 0.3) * (1 - align);
-      glowMat.opacity = 0.05 + glowT * (isXale ? 0.4 : 0.18);
+        ? THREE.MathUtils.smoothstep(p, 0.7, 0.92)
+        : THREE.MathUtils.smoothstep(p, 0.0, 0.25) * (1 - align);
+      glowMat.opacity = 0.05 + glowT * (isXale ? 0.45 : 0.2);
     }
   });
 
   return (
     <group ref={groupRef}>
-      {/* Panel body */}
+      {/* Card body */}
       <mesh>
-        <boxGeometry args={[2.4, 1.55, 0.05]} />
+        <boxGeometry args={[PANEL_W, PANEL_H, 0.04]} />
         <meshStandardMaterial
-          color={isXale ? "#0a1f17" : "#0e2620"}
-          metalness={0.35}
-          roughness={0.4}
+          color={isXale ? "#0a1f17" : "#0c211c"}
+          metalness={0.42}
+          roughness={0.36}
           emissive={isXale ? "#0e3225" : "#04150f"}
-          emissiveIntensity={isXale ? 0.7 : 0.35}
+          emissiveIntensity={isXale ? 0.8 : 0.35}
         />
       </mesh>
 
-      {/* Panel UI (channel-specific) */}
-      <UIComponent accent={config.accent} />
+      {/* Card content */}
+      <CardContent tint={config.tint} sides={config.sides} />
 
       {/* Outer rim glow */}
       <mesh ref={glowRef} position={[0, 0, -0.04]}>
-        <planeGeometry args={[2.8, 1.95]} />
+        <planeGeometry args={[PANEL_W + 0.28, PANEL_H + 0.28]} />
         <meshBasicMaterial
-          color={accentColor}
+          color={tintColor}
           transparent
           opacity={0.05}
           blending={THREE.AdditiveBlending}
@@ -420,7 +286,6 @@ function StackContainer({
     if (!groupRef.current) return;
     target.current.x += (pointer.x - target.current.x) * 0.04;
     target.current.y += (pointer.y - target.current.y) * 0.04;
-    // Tilt the whole stack with cursor
     groupRef.current.rotation.y = target.current.x * 0.25;
     groupRef.current.rotation.x = -target.current.y * 0.18;
   });
@@ -438,7 +303,6 @@ function CameraRig({ progressRef }: { progressRef: RefObject<number> }) {
   const { camera } = useThree();
   useFrame(() => {
     const p = progressRef.current ?? 0;
-    // Subtle dolly in as stack assembles
     const z = THREE.MathUtils.lerp(7.0, 5.8, p);
     camera.position.z += (z - camera.position.z) * 0.07;
     camera.lookAt(0, 0, 0);

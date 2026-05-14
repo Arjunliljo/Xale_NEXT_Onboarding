@@ -68,7 +68,16 @@ export default function Solution() {
             >
               Every channel.
               <br />
-              One stack.
+              <span
+                className="italic font-normal"
+                style={{
+                  fontFamily: "var(--font-instrument-serif), serif",
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                One stack
+              </span>
+              .
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
@@ -76,8 +85,8 @@ export default function Solution() {
               className="mx-auto max-w-xl text-sm md:text-base leading-relaxed"
               style={{ color: "rgba(255,255,255,0.7)" }}
             >
-              Your scattered inboxes, ad platforms, and call logs collapse into
-              a single layered view. Scroll to assemble.
+              Inboxes, ad platforms, call logs — drawn out of the scatter into
+              one layered view. Scroll to assemble.
             </p>
           </Reveal>
         </div>

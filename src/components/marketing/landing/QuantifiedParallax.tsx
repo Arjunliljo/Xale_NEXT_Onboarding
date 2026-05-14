@@ -19,6 +19,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useReducedMotion } from "motion/react";
 import { useIsMobile } from "@/src/hooks/useMediaQuery";
+import AnimatedWaveDivider from "./AnimatedWaveDivider";
 
 type Stat = {
   value: string;
@@ -137,6 +138,7 @@ export default function QuantifiedParallax() {
             ))}
           </div>
         </div>
+        <AnimatedWaveDivider fill="#020c08" height={120} />
       </section>
     );
   }
@@ -255,6 +257,7 @@ export default function QuantifiedParallax() {
       {STATS.map((stat, i) => (
         <ParallaxStatCard key={i} stat={stat} scrollYProgress={scrollYProgress} reduce={!!reduce} />
       ))}
+      <AnimatedWaveDivider fill="#020c08" height={120} />
     </section>
   );
 }

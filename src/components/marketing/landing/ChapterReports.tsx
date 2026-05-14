@@ -32,7 +32,17 @@ export default function ChapterReports() {
                 className="text-4xl max-sm:text-2xl md:text-5xl font-medium leading-[1.05] mb-6"
                 style={{ letterSpacing: "-0.03em" }}
               >
-                Numbers that actually mean something.
+                Numbers that actually{" "}
+                <span
+                  className="italic font-normal"
+                  style={{
+                    fontFamily: "var(--font-instrument-serif), serif",
+                    letterSpacing: "-0.02em",
+                  }}
+                >
+                  mean something
+                </span>
+                .
               </h2>
             </Reveal>
             <Reveal delay={0.1}>

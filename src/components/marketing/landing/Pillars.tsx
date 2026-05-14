@@ -35,44 +35,44 @@ type Pillar = {
 const PILLARS: Pillar[] = [
   {
     kind: "lead",
-    title: "Lead Management",
+    title: "Every channel, one pipeline.",
     description:
-      "Capture leads from Meta, WhatsApp, and custom sources. Track every interaction through a visual pipeline.",
+      "Meta, WhatsApp, web forms, calls, CSV, custom webhooks — leads land typed, deduped, and source-attributed in seconds. One inbox for every source.",
     accent: "#156548",
   },
   {
     kind: "whatsapp",
-    title: "WhatsApp Integration",
+    title: "WhatsApp Cloud, native.",
     description:
-      "Send messages, templates, and broadcasts directly from your CRM. Full chat history synced in real-time.",
+      "Templates, broadcasts, and 1:1 chats from the same surface as your leads. Full history synced in real time — no second tab, no shared phone.",
     accent: "#25D366",
   },
   {
     kind: "custom",
-    title: "Custom Fields & Modules",
+    title: "One lead. Many projects.",
     description:
-      "Tailor every field, stage, and workflow to match your industry — without engineering.",
+      "Bridge leads to courses, services, packages, or properties — whatever your industry calls them. Custom fields scoped per stage, gated per role, no engineering.",
     accent: "#5E81F4",
   },
   {
     kind: "rbac",
-    title: "Role-Based Access",
+    title: "Permissions for complex teams.",
     description:
-      "Fine-grained permissions per stage, source, and action. Five preset roles or build your own.",
+      "Per stage. Per source. Per action. Per branch. Compose any role from blueprints — built for organisations with dozens of roles and hundreds of users.",
     accent: "#0F766E",
   },
   {
     kind: "automations",
-    title: "Automations",
+    title: "Routing that thinks.",
     description:
-      "Auto-assign leads, trigger follow-up reminders, sync sources. Six triggers, twenty-three actions, no code.",
+      "Matrix-based auto-assignment by role, branch, source, or load. Six triggers, twenty-three actions, zero code. When multiple owners qualify, Xale splits the deal automatically.",
     accent: "#F59E0B",
   },
   {
     kind: "reports",
-    title: "Reports & Dashboard",
+    title: "Every move, on the record.",
     description:
-      "Real-time analytics on lead flow, conversions, team performance, and follow-up compliance.",
+      "Real-time dashboards on lead flow, response SLAs, stage velocity, role compliance — plus an immutable activity log of every assignment, edit, and rollback. Audit-ready, exportable.",
     accent: "#7C3AED",
   },
 ];
@@ -131,8 +131,9 @@ export default function Pillars() {
                   letterSpacing: "-0.02em",
                 }}
               >
-                more deals.
+                more deals
               </span>
+              .
             </h2>
           </Reveal>
           <Reveal delay={0.2}>
@@ -140,8 +141,9 @@ export default function Pillars() {
               className="mx-auto max-w-2xl text-lg max-sm:text-sm leading-relaxed"
               style={{ color: "var(--color-text-gray,#6f6f6f)" }}
             >
-              A complete toolkit for modern sales teams — built to be flexible,
-              fast, and ridiculously easy to use.
+              Sales, admissions, services, ops — any team where leads have
+              multiple projects, dozens of roles, and routing rules that change
+              by stage.
             </p>
           </Reveal>
         </div>
@@ -179,13 +181,14 @@ function PillarCard({ pillar, index }: { pillar: Pillar; index: number }) {
       animate={reduce ? {} : { y: hovered ? -4 : 0 }}
       data-cursor="link"
       style={{
-        backgroundColor: "#ffffff",
-        border: `1px solid ${hovered ? "rgba(5,25,18,0.10)" : "rgba(230,232,231,0.85)"}`,
+        background:
+          "linear-gradient(180deg, #f7f9fb 0%, #ecf0f4 100%)",
+        border: "none",
         boxShadow: hovered
-          ? "0 24px 48px -28px rgba(5,25,18,0.18), 0 4px 8px -4px rgba(5,25,18,0.05)"
-          : "0 1px 2px -1px rgba(5,25,18,0.04)",
+          ? "0 28px 56px -22px rgba(5,25,18,0.22), 0 8px 16px -8px rgba(5,25,18,0.10)"
+          : "0 10px 24px -16px rgba(5,25,18,0.16), 0 2px 6px -3px rgba(5,25,18,0.06)",
         transition:
-          "box-shadow 0.35s ease, border-color 0.35s ease, transform 0.35s cubic-bezier(0.22,1,0.36,1)",
+          "box-shadow 0.35s ease, transform 0.35s cubic-bezier(0.22,1,0.36,1)",
       }}
       className="relative rounded-2xl p-7 max-sm:p-3 cursor-default flex flex-col overflow-hidden"
     >
@@ -193,8 +196,6 @@ function PillarCard({ pillar, index }: { pillar: Pillar; index: number }) {
       <div
         className="relative h-[160px] max-sm:h-[80px] -mx-7 max-sm:-mx-3 -mt-7 max-sm:-mt-3 mb-6 max-sm:mb-3 overflow-hidden"
         style={{
-          backgroundColor: "#fafbfb",
-          borderBottom: "1px solid rgba(230,232,231,0.7)",
           backgroundImage:
             "radial-gradient(rgba(5,25,18,0.06) 1px, transparent 1px)",
           backgroundSize: "16px 16px",

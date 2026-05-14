@@ -5,6 +5,7 @@ import { useState } from "react";
 import Reveal from "../motion/Reveal";
 import JsonLd from "../seo/JsonLd";
 import { faqPageSchema } from "@/src/lib/seo/schemas";
+import AnimatedWaveDivider from "./AnimatedWaveDivider";
 
 const FAQS = [
   {
@@ -45,7 +46,7 @@ export default function Faq() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section className="py-32 max-md:py-12 max-sm:py-8" style={{ backgroundColor: "#ffffff" }}>
+    <section className="relative overflow-hidden py-32 max-md:py-12 max-md:pb-20 max-sm:py-8 max-sm:pb-16" style={{ backgroundColor: "#ffffff" }}>
       <JsonLd data={faqPageSchema(FAQS.map((f) => ({ question: f.q, answer: f.a })))} />
       <div className="max-w-[800px] mx-auto px-6 max-sm:px-4">
         <div className="text-center mb-16 max-md:mb-6">
@@ -65,7 +66,17 @@ export default function Faq() {
                 color: "var(--color-text-primary,#1e302a)",
               }}
             >
-              Frequently asked questions.
+              Frequently asked{" "}
+              <span
+                className="italic font-normal"
+                style={{
+                  fontFamily: "var(--font-instrument-serif), serif",
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                questions
+              </span>
+              .
             </h2>
           </Reveal>
         </div>
@@ -122,6 +133,7 @@ export default function Faq() {
           ))}
         </div>
       </div>
+      <AnimatedWaveDivider fill="#020c08" height={120} />
     </section>
   );
 }

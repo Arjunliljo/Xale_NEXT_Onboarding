@@ -57,18 +57,19 @@ function LeadCard({
   const groupRef = useRef<THREE.Group>(null);
   const glowRef = useRef<THREE.Mesh>(null);
   const accent = useMemo(() => new THREE.Color(TOOL_COLOR[lead.tool]), [lead.tool]);
-  // Per-card delta accumulator wrapped at 2π so rotation values stay small
-  // forever. Using `state.clock.elapsedTime` directly grows unbounded and
-  // loses float precision after long sessions, which manifests as the
-  // scroll-driven spin appearing to accelerate the longer you're on the page.
-  const tRef = useRef(0);
+  // Per-axis rotation accumulators wrapped at 2π. Sharing a single `t` and
+  // scaling by non-integer per-axis coefficients caused a visible jolt every
+  // ~6s when t wrapped, because the wrap didn't land on a 2π boundary in the
+  // scaled rotation. Per-axis wrap lands cleanly on 2π and is invisible.
+  const rotXRef = useRef(0);
+  const rotYRef = useRef(0);
+  const zPhaseRef = useRef(0);
 
   useFrame((_, dt) => {
     if (!groupRef.current || !glowRef.current) return;
     const p = progressRef.current ?? 0;
     // Clamp dt to avoid huge catch-up jumps when the tab regains focus.
     const safeDt = dt > 0.1 ? 0.1 : dt;
-    tRef.current = (tRef.current + safeDt) % (Math.PI * 2);
 
     // Drift outward as scroll progresses
     const drift = p; // 0 → 1
@@ -76,12 +77,14 @@ function LeadCard({
     groupRef.current.position.y = lead.startPos[1] + lead.driftDir[1] * drift;
     groupRef.current.position.z = lead.startPos[2] + lead.driftDir[2] * drift;
 
-    // Tumbling rotation, accelerating with scroll
+    // Tumbling rotation, accelerating with scroll.
     const spin = 0.2 + p * 1.2;
-    const t = tRef.current;
-    groupRef.current.rotation.x = lead.rotPhase + t * spin * 0.4;
-    groupRef.current.rotation.y = lead.rotPhase + t * spin * 0.6;
-    groupRef.current.rotation.z = Math.sin(t * 0.5 + index) * 0.1;
+    rotXRef.current = (rotXRef.current + safeDt * spin * 0.4) % (Math.PI * 2);
+    rotYRef.current = (rotYRef.current + safeDt * spin * 0.6) % (Math.PI * 2);
+    zPhaseRef.current = (zPhaseRef.current + safeDt * 0.5) % (Math.PI * 2);
+    groupRef.current.rotation.x = lead.rotPhase + rotXRef.current;
+    groupRef.current.rotation.y = lead.rotPhase + rotYRef.current;
+    groupRef.current.rotation.z = Math.sin(zPhaseRef.current + index) * 0.1;
 
     // Red "missed" glow grows past 60% scroll
     const missGlow = THREE.MathUtils.smoothstep(p, 0.5, 1.0);

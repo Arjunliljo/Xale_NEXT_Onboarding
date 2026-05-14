@@ -1,29 +1,22 @@
 "use client";
 
 /**
- * PipelineStory — Apple-style pinned scroll storytelling.
+ * PipelineStory — four phases a lead moves through, shown as cards.
  *
- * Pattern (per 2026 best-practice research):
- *  - GSAP ScrollTrigger pins the section for `endDistance` of scroll and writes
- *    progress (0→1) into a useRef.
- *  - The R3F canvas reads that ref inside useFrame — never React state — so
- *    the scene re-renders zero React components per scroll tick.
- *  - DOM phase copy lives in real HTML (good for SEO + accessibility).
- *    The phase index is derived from scroll progress; only phase changes
- *    trigger a setState (≤ 4 state updates per full scroll).
- *  - The R3F scene is dynamic-imported with ssr:false from the parent.
- *  - Reduced-motion: pin disabled, phases render as a stack of cards.
+ * Why this shape:
+ *  - Previous version pinned the section and cross-faded text between phases.
+ *    Users couldn't compare phases side-by-side, and the swap fought with
+ *    the snappy reveal pattern used elsewhere on the page.
+ *  - Now all four phases reveal as cards on scroll (same pattern as Pillars).
+ *  - 3D PipelineScene stays as a hero band at the top, driven by section
+ *    scroll progress (Framer Motion useScroll) instead of GSAP pin.
  */
 
-import { useRef, useState } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
+import { useRef } from "react";
 import dynamic from "next/dynamic";
-import { AnimatePresence, motion } from "motion/react";
-import { useIsMobile } from "@/src/hooks/useMediaQuery";
-
-gsap.registerPlugin(ScrollTrigger, useGSAP);
+import { motion, useScroll, useMotionValueEvent } from "motion/react";
+import Reveal from "../motion/Reveal";
+import AnimatedWaveDivider from "./AnimatedWaveDivider";
 
 const PipelineScene = dynamic(
   () => import("../three/PipelineScene"),
@@ -32,86 +25,67 @@ const PipelineScene = dynamic(
 
 const PHASES = [
   {
-    eyebrow: "Phase 01 · Capture",
-    title: "Every lead, every channel.",
-    body: "Meta Lead Ads, WhatsApp inbound, web forms, custom webhooks — leads land in Xale within seconds of submission. Source-attributed, deduplicated, typed.",
+    num: "01",
+    eyebrow: "Capture",
+    title: "It lands, no matter where it came from.",
+    body: "A Meta ad. A WhatsApp chat. A web form. A custom webhook. Xale picks it up in seconds — source-tagged, deduplicated, and ready to work.",
   },
   {
-    eyebrow: "Phase 02 · Align",
-    title: "The pipeline takes shape.",
-    body: "Routing rules match leads to counsellors by country, value, language. No drag-and-drop. No manual triage. The pipeline assembles itself.",
+    num: "02",
+    eyebrow: "Align",
+    title: "It finds the right person.",
+    body: "Your routing rules — country, language, value, who's free — decide where it goes. No drag-and-drop, no manual triage, no lead sitting in someone's inbox.",
   },
   {
-    eyebrow: "Phase 03 · Activate",
-    title: "First touch in 8 seconds.",
-    body: "Pre-approved WhatsApp templates fire automatically — addressed by name, referencing the form answer, delivered before the prospect closes the tab.",
+    num: "03",
+    eyebrow: "Activate",
+    title: "It gets a reply before the tab closes.",
+    body: "A WhatsApp template fires the moment they submit — calling them by name, referencing what they asked about. They're talking to you in seconds, not hours.",
   },
   {
-    eyebrow: "Phase 04 · Close",
-    title: "Compounding pipeline.",
-    body: "Every closed deal feeds the next one. Faster response → more conversions → more data → smarter routing → faster response. The flywheel runs itself.",
+    num: "04",
+    eyebrow: "Compound",
+    title: "It makes the next lead faster.",
+    body: "Every closed deal feeds the next one. Faster response → more conversions → more data → smarter routing. The flywheel runs itself.",
   },
 ];
 
 export default function PipelineStory() {
   const sectionRef = useRef<HTMLElement>(null);
   const progressRef = useRef(0);
-  const [phase, setPhase] = useState(0);
-  const isMobile = useIsMobile();
 
-  useGSAP(
-    () => {
-      if (typeof window === "undefined") return;
-      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const mobile = window.matchMedia("(max-width: 768px)").matches;
-      if (reduce || mobile) return;
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    progressRef.current = v;
+  });
 
-      const ctx = gsap.context(() => {
-        ScrollTrigger.create({
-          trigger: sectionRef.current,
-          start: "top top",
-          end: "+=400%", // 4 viewports of scroll for the pinned section
-          pin: true,
-          scrub: 0.6,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-          onUpdate(self) {
-            progressRef.current = self.progress;
-            const next = Math.min(
-              PHASES.length - 1,
-              Math.floor(self.progress * PHASES.length)
-            );
-            setPhase((prev) => (prev === next ? prev : next));
-          },
-        });
-      }, sectionRef);
-
-      return () => ctx.revert();
-    },
-    { scope: sectionRef }
-  );
-
-  if (isMobile) {
-    return (
-      <section
-        data-nav-theme="dark"
-        className="relative overflow-hidden py-10"
-        style={{
-          backgroundColor: "#020c08",
-          backgroundImage:
-            "radial-gradient(70% 55% at 50% 50%, rgba(14,50,37,0.9) 0%, transparent 75%)",
-          color: "#fff",
-        }}
-      >
-        <div className="relative z-10 max-w-[1200px] mx-auto px-4">
-          <div className="flex justify-center mb-6">
+  return (
+    <section
+      ref={sectionRef}
+      data-nav-theme="dark"
+      className="relative overflow-hidden pt-24 pb-32 max-md:pt-16 max-md:pb-24"
+      style={{
+        backgroundColor: "#020c08",
+        backgroundImage:
+          "radial-gradient(70% 55% at 50% 50%, rgba(14,50,37,0.9) 0%, transparent 75%)",
+        color: "#fff",
+      }}
+    >
+      <div className="relative z-10 max-w-[1200px] mx-auto px-6 max-sm:px-4">
+        {/* Top chip */}
+        <Reveal>
+          <div className="flex justify-center mb-8">
             <span
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] text-center"
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs"
               style={{
                 border: "1px solid rgba(152, 205, 184, 0.25)",
                 backgroundColor: "rgba(49,155,114,0.08)",
                 color: "rgba(255,255,255,0.85)",
                 backdropFilter: "blur(8px)",
+                WebkitBackdropFilter: "blur(8px)",
               }}
             >
               <span
@@ -121,137 +95,130 @@ export default function PipelineStory() {
                   boxShadow: "0 0 8px #319b72",
                 }}
               />
-              One lead. Four phases.
+              How a lead becomes a deal
             </span>
           </div>
-          <div className="grid grid-cols-2 gap-3">
-          {PHASES.map((p, i) => (
-            <div key={i} className="rounded-xl p-3" style={{ border: "1px solid rgba(255,255,255,0.08)", backgroundColor: "rgba(255,255,255,0.03)" }}>
-              <p
-                className="text-[10px] uppercase tracking-[0.18em] mb-1.5"
-                style={{ color: "#98cdb8" }}
-              >
-                {p.eyebrow}
-              </p>
-              <h2
-                className="text-base font-medium leading-tight mb-1.5"
-                style={{ letterSpacing: "-0.02em" }}
-              >
-                {p.title}
-              </h2>
-              <p
-                className="text-[12px] leading-snug"
-                style={{ color: "rgba(255,255,255,0.7)" }}
-              >
-                {p.body}
-              </p>
-            </div>
-          ))}
-          </div>
-        </div>
-      </section>
-    );
-  }
+        </Reveal>
 
-  return (
-    <section
-      ref={sectionRef}
-      data-nav-theme="dark"
-      className="relative h-screen overflow-hidden"
-      style={{
-        backgroundColor: "#020c08",
-        backgroundImage:
-          "radial-gradient(70% 55% at 50% 50%, rgba(14,50,37,0.9) 0%, transparent 75%)",
-        color: "#fff",
-      }}
-    >
-      {/* 3D canvas — absolutely positioned, full bleed, lazy-loaded */}
-      <div className="absolute inset-0">
-        <PipelineScene progressRef={progressRef} />
-      </div>
+        {/* Headline */}
+        <Reveal delay={0.1}>
+          <h2
+            className="text-4xl max-sm:text-3xl md:text-6xl font-medium leading-[1.05] mb-6 max-w-3xl mx-auto text-center"
+            style={{ letterSpacing: "-0.035em" }}
+          >
+            From click to conversation in{" "}
+            <span
+              className="italic font-normal"
+              style={{
+                fontFamily: "var(--font-instrument-serif), serif",
+                letterSpacing: "-0.02em",
+              }}
+            >
+              eight seconds
+            </span>
+            .
+          </h2>
+        </Reveal>
 
-      {/* Vignette to bring focus to text */}
-      <div
-        aria-hidden
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 80% 60% at 50% 50%, transparent 0%, rgba(2,12,8,0.55) 80%, rgba(2,12,8,0.85) 100%)",
-        }}
-      />
+        {/* Subhead */}
+        <Reveal delay={0.2}>
+          <p
+            className="mx-auto max-w-2xl text-lg max-sm:text-sm leading-relaxed text-center mb-10 max-md:mb-8"
+            style={{ color: "rgba(255,255,255,0.7)" }}
+          >
+            Every lead moves through four phases. You write the rules once.
+            Xale does the running — capture, route, reply, learn — and your
+            team just shows up for the conversation.
+          </p>
+        </Reveal>
 
-      {/* Top chip */}
-      <div className="relative z-10 flex justify-center pt-12">
-        <span
-          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs"
-          style={{
-            border: "1px solid rgba(152, 205, 184, 0.25)",
-            backgroundColor: "rgba(49,155,114,0.08)",
-            color: "rgba(255,255,255,0.85)",
-            backdropFilter: "blur(8px)",
-          }}
-        >
-          <span
-            className="w-1.5 h-1.5 rounded-full"
-            style={{
-              backgroundColor: "#319b72",
-              boxShadow: "0 0 8px #319b72",
-            }}
-          />
-          One lead. Four phases. Eight seconds to first touch.
-        </span>
-      </div>
-
-      {/* Text overlay (bottom-aligned so 3D scene gets the spotlight) */}
-      <div className="relative z-10 h-full flex items-end pb-24">
-        <div className="max-w-[1200px] mx-auto w-full px-6">
-          <div className="max-w-xl">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={phase}
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -16 }}
-                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <p
-                  className="text-sm uppercase tracking-[0.2em] mb-4"
-                  style={{ color: "#98cdb8" }}
-                >
-                  {PHASES[phase].eyebrow}
-                </p>
-                <h2
-                  className="text-5xl md:text-7xl font-medium leading-[1.02] mb-6"
-                  style={{ letterSpacing: "-0.035em" }}
-                >
-                  {PHASES[phase].title}
-                </h2>
-                <p
-                  className="text-base md:text-lg max-sm:text-sm leading-relaxed"
-                  style={{ color: "rgba(255,255,255,0.7)" }}
-                >
-                  {PHASES[phase].body}
-                </p>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </div>
-      </div>
-
-      {/* Progress dots */}
-      <div className="absolute bottom-8 right-8 z-10 flex flex-col gap-2">
-        {PHASES.map((_, i) => (
+        {/* 3D Scene — hero band, scroll-progress driven */}
+        <Reveal delay={0.25}>
           <div
-            key={i}
-            className="w-2 h-2 rounded-full transition-all"
-            style={{
-              backgroundColor: i === phase ? "#319b72" : "rgba(255,255,255,0.2)",
-              boxShadow: i === phase ? "0 0 10px #319b72" : "none",
-              transform: i === phase ? "scale(1.2)" : "scale(1)",
-            }}
-          />
-        ))}
+            className="relative w-full mb-10 max-md:mb-8 max-md:h-[180px] max-sm:h-[140px]"
+            style={{ height: "240px" }}
+          >
+            <PipelineScene progressRef={progressRef} />
+          </div>
+        </Reveal>
+
+        {/* Phase cards — animation triggers ~300px before they enter the
+            viewport, with a gentle ease and a wave-style stagger so the four
+            cards have already settled by the time the reader is looking at
+            them. */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 max-sm:gap-3">
+          {PHASES.map((p, i) => (
+            <motion.div
+              key={p.num}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "1600px 0px 1600px 0px" }}
+              transition={{
+                duration: 1.4,
+                delay: 0.05 + i * 0.18,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              className="relative rounded-2xl p-7 max-sm:p-4 h-full flex flex-col overflow-hidden"
+              style={{
+                background:
+                  "linear-gradient(135deg, rgba(14,38,30,0.78) 0%, rgba(8,26,20,0.82) 100%)",
+                border: "1px solid rgba(120,200,165,0.18)",
+                backdropFilter: "blur(12px)",
+                WebkitBackdropFilter: "blur(12px)",
+                boxShadow:
+                  "0 12px 32px -12px rgba(0,0,0,0.5), 0 4px 12px -4px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05)",
+              }}
+            >
+                {/* Top accent line */}
+                <div
+                  aria-hidden
+                  className="absolute top-0 left-8 right-8 h-px"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, transparent 0%, rgba(120,200,165,0.55) 50%, transparent 100%)",
+                  }}
+                />
+
+                <div className="mb-5 max-sm:mb-3">
+                  <span
+                    className="block text-[10px] uppercase tracking-[0.24em] mb-2 max-sm:mb-1.5"
+                    style={{ color: "#98cdb8" }}
+                  >
+                    {p.eyebrow}
+                  </span>
+                  <span
+                    className="block text-[44px] max-sm:text-[32px] font-semibold leading-none"
+                    style={{
+                      letterSpacing: "-0.04em",
+                      background:
+                        "linear-gradient(135deg, #d1e4d9 0%, #6fb99c 50%, #319b72 100%)",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      backgroundClip: "text",
+                    }}
+                  >
+                    {p.num}
+                  </span>
+                </div>
+
+                <h3
+                  className="text-base max-sm:text-[14px] font-medium mb-2.5 max-sm:mb-1.5 leading-snug"
+                  style={{ letterSpacing: "-0.01em" }}
+                >
+                  {p.title}
+                </h3>
+                <p
+                  className="text-[13px] max-sm:text-[11.5px] leading-relaxed max-sm:leading-snug"
+                  style={{ color: "rgba(255,255,255,0.65)" }}
+                >
+                  {p.body}
+                </p>
+            </motion.div>
+          ))}
+        </div>
       </div>
+
+      <AnimatedWaveDivider fill="#ffffff" height={120} />
     </section>
   );
 }

@@ -48,7 +48,17 @@ export default function FinalCta() {
             className="text-5xl max-sm:text-3xl md:text-7xl font-medium leading-[1.05] mb-6"
             style={{ letterSpacing: "-0.035em" }}
           >
-            Ready to grow your pipeline?
+            Ready to{" "}
+            <span
+              className="italic font-normal"
+              style={{
+                fontFamily: "var(--font-instrument-serif), serif",
+                letterSpacing: "-0.025em",
+              }}
+            >
+              grow your pipeline
+            </span>
+            ?
           </h2>
         </Reveal>
         <Reveal delay={0.1}>

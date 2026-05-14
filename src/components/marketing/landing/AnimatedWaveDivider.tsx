@@ -24,6 +24,12 @@ export default function AnimatedWaveDivider({
   className,
   style,
 }: Props) {
+  // Scale wave height down on narrower viewports so it doesn't crash into
+  // the bottom of mobile sections (where py is much smaller than the wave).
+  const responsiveHeight =
+    typeof height === "number"
+      ? `clamp(40px, 7vw, ${height}px)`
+      : height;
   return (
     <div
       aria-hidden
@@ -33,7 +39,7 @@ export default function AnimatedWaveDivider({
         bottom: 0,
         left: 0,
         right: 0,
-        height,
+        height: responsiveHeight,
         pointerEvents: "none",
         ...style,
       }}

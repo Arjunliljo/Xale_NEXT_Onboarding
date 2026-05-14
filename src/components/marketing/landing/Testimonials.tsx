@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import Reveal from "../motion/Reveal";
+import AnimatedWaveDivider from "./AnimatedWaveDivider";
 
 const QUOTES = [
   {
@@ -31,7 +32,7 @@ export default function Testimonials() {
   return (
     <section
       data-nav-theme="dark"
-      className="py-32 max-md:py-12 max-sm:py-8"
+      className="relative overflow-hidden py-32 max-md:py-12 max-md:pb-20 max-sm:py-8 max-sm:pb-16"
       style={{
         backgroundColor: "#020c08",
         backgroundImage:
@@ -103,6 +104,7 @@ export default function Testimonials() {
           ))}
         </div>
       </div>
+      <AnimatedWaveDivider fill="#ffffff" height={120} />
     </section>
   );
 }

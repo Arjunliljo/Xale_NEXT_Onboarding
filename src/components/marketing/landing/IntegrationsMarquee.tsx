@@ -41,7 +41,17 @@ export default function IntegrationsMarquee() {
               letterSpacing: "-0.02em",
             }}
           >
-            Plays well with your stack.
+            Plays well with{" "}
+            <span
+              className="italic font-normal"
+              style={{
+                fontFamily: "var(--font-instrument-serif), serif",
+                letterSpacing: "-0.015em",
+              }}
+            >
+              your stack
+            </span>
+            .
           </h2>
         </Reveal>
       </div>

@@ -1,17 +1,17 @@
 import Reveal from "../motion/Reveal";
 
 const LOGOS = [
-  "Nila Academy",
-  "Kayal Studio",
-  "Kerala Wings",
-  "Munnar Trails",
-  "Vembanad Films",
-  "Periyar Edu",
+  "Marketlube",
+  "Skymark Education",
+  "Jain University",
+  "Campusways",
+  "Clarix Education",
 ];
 
 export default function TrustStrip() {
   return (
     <section
+      data-nav-theme="dark"
       className="py-20 max-md:py-12 relative"
       style={{
         backgroundColor: "#020c08",
@@ -21,13 +21,24 @@ export default function TrustStrip() {
     >
       <div className="max-w-[1200px] mx-auto px-6 max-sm:px-4 relative">
         <Reveal>
-          <p
-            className="text-center text-sm mb-10 max-md:mb-6"
-            style={{ color: "rgba(255,255,255,0.55)" }}
-          >
-            Trusted by sales teams across studios, academies, and consultancies
-            — globally.
-          </p>
+          <div className="text-center mb-10 max-md:mb-6">
+            <h2
+              className="text-sm font-medium leading-[1.05]"
+              style={{
+                color: "rgba(255,255,255,0.95)",
+                letterSpacing: "-0.035em",
+              }}
+            >
+              Leads route themselves. Your reps just close.
+            </h2>
+            <p
+              className="italic text-sm max-sm:text-xs mt-2 whitespace-nowrap max-sm:whitespace-normal"
+              style={{ color: "rgba(255,255,255,0.55)" }}
+            >
+              Source, branch, partner, vertical — auto-assignment that bends to
+              any rule. Built in. No add-ons.
+            </p>
+          </div>
         </Reveal>
 
         {/* Desktop / tablet — wrap (unchanged) */}

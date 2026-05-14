@@ -60,7 +60,17 @@ export default function Comparison() {
                 color: "var(--color-text-primary,#1e302a)",
               }}
             >
-              Why teams switch to Xale.
+              Why teams{" "}
+              <span
+                className="italic font-normal"
+                style={{
+                  fontFamily: "var(--font-instrument-serif), serif",
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                switch to Xale
+              </span>
+              .
             </h2>
           </Reveal>
         </div>
