@@ -8,7 +8,7 @@ const MESSAGES = [
   { side: "in", text: "Hi! Is the IELTS coaching still available for May?", delay: 0.3 },
   {
     side: "out",
-    text: "Hi Anjana! Yes, our May batch starts on the 20th — 6 seats left. Want me to send you the syllabus?",
+    text: "Hi Arjun! Yes, our May batch starts on the 20th — 6 seats left. Want me to send you the syllabus?",
     delay: 0.9,
   },
   { side: "in", text: "Yes please, and the fee structure", delay: 1.5 },
@@ -132,7 +132,7 @@ export default function ChapterWhatsApp() {
                       A
                     </div>
                     <div>
-                      <div className="text-sm font-medium">Anjana Pillai</div>
+                      <div className="text-sm font-medium">Arjun</div>
                       <div className="text-[11px] opacity-80">online</div>
                     </div>
                   </div>

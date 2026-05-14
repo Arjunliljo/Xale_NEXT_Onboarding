@@ -31,6 +31,7 @@ export default function HowItWorks() {
         backgroundImage:
           "radial-gradient(70% 55% at 50% 50%, rgba(26,74,55,0.85) 0%, transparent 70%)",
         color: "#fff",
+        marginTop: "-1px",
       }}
     >
       <div className="max-w-[1200px] mx-auto px-6 max-sm:px-4">

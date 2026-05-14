@@ -89,6 +89,7 @@ export default function Problem() {
         backgroundImage:
           "radial-gradient(70% 55% at 50% 50%, rgba(16,47,35,0.9) 0%, transparent 70%)",
         color: "#fff",
+        marginTop: "-1px",
         minHeight: "90vh",
       }}
     >

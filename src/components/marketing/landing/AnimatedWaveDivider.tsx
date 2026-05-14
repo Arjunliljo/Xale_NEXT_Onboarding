@@ -36,11 +36,14 @@ export default function AnimatedWaveDivider({
       className={className}
       style={{
         position: "absolute",
-        bottom: 0,
+        // 1px overlap into the next section so the wave's bottom edge can't
+        // ever expose a sub-pixel hairline gap from anti-aliasing or rounding.
+        bottom: -1,
         left: 0,
         right: 0,
         height: responsiveHeight,
         pointerEvents: "none",
+        lineHeight: 0,
         ...style,
       }}
     >
@@ -49,7 +52,7 @@ export default function AnimatedWaveDivider({
         preserveAspectRatio="none"
         width="100%"
         height="100%"
-        style={{ display: "block" }}
+        style={{ display: "block", verticalAlign: "bottom" }}
       >
         {/* Back wave — slower, more transparent */}
         <motion.path

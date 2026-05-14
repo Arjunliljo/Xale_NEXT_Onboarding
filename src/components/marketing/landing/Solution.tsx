@@ -33,6 +33,7 @@ export default function Solution() {
         backgroundImage:
           "radial-gradient(70% 55% at 50% 50%, rgba(26,74,55,0.9) 0%, transparent 70%)",
         color: "#fff",
+        marginTop: "-1px",
         height: "100vh", // exact — no remainder, no trailing gap
         minHeight: "640px",
       }}

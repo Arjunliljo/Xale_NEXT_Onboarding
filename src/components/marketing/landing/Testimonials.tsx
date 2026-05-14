@@ -38,6 +38,7 @@ export default function Testimonials() {
         backgroundImage:
           "radial-gradient(70% 55% at 50% 50%, rgba(16,47,35,0.9) 0%, transparent 70%)",
         color: "#fff",
+        marginTop: "-1px",
       }}
     >
       <div className="max-w-[1100px] mx-auto px-6 max-sm:px-4">
